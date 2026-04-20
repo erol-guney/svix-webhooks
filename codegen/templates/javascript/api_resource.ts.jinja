@@ -11,8 +11,8 @@ import {
 {# HACK: can't easily do this with api_extra files -#}
 {% if resource.name == "authentication" -%}
 import {
-  DashboardAccessOut,
-  DashboardAccessOutSerializer,
+    type DashboardAccessOut,
+    DashboardAccessOutSerializer,
 } from "../models/dashboardAccessOut";
 {% endif -%}
 {% for _, sub in resource.subresources | items -%}
@@ -49,7 +49,7 @@ import { MessageIn, MessageInSerializer } from "../models/messageIn";
 {% if resource.name == "authentication" %}
 /** @deprecated */
 export interface AuthenticationDashboardAccessOptions {
-  idempotencyKey?: string;
+    idempotencyKey?: string;
 }
 
 {% endif -%}
