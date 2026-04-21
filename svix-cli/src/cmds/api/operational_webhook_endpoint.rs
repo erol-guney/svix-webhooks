@@ -72,28 +72,77 @@ pub struct OperationalWebhookEndpointArgs {
 #[derive(Subcommand)]
 pub enum OperationalWebhookEndpointCommands {
     /// List operational webhook endpoints.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix operational-webhook endpoint list\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     List {
         #[clap(flatten)]
         options: OperationalWebhookEndpointListOptions,
     },
     /// Create an operational webhook endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix operational-webhook endpoint create\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Create {
         operational_webhook_endpoint_in: crate::json::JsonOf<OperationalWebhookEndpointIn>,
         #[clap(flatten)]
         options: OperationalWebhookEndpointCreateOptions,
     },
     /// Get an operational webhook endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix operational-webhook endpoint get ep_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Get { endpoint_id: String },
     /// Update an operational webhook endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix operational-webhook endpoint update ep_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Update {
         endpoint_id: String,
         operational_webhook_endpoint_update: crate::json::JsonOf<OperationalWebhookEndpointUpdate>,
     },
     /// Delete an operational webhook endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix operational-webhook endpoint delete ep_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Delete { endpoint_id: String },
     /// Get the additional headers to be sent with the operational webhook.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix operational-webhook endpoint get-headers ep_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     GetHeaders { endpoint_id: String },
     /// Set the additional headers to be sent with the operational webhook.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix operational-webhook endpoint update-headers ep_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     UpdateHeaders {
         endpoint_id: String,
         operational_webhook_endpoint_headers_in:
@@ -103,10 +152,24 @@ pub enum OperationalWebhookEndpointCommands {
     ///
     /// This is used to verify the authenticity of the webhook.
     /// For more information please refer to [the consuming webhooks docs](https://docs.svix.com/consuming-webhooks/).
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix operational-webhook endpoint get-secret ep_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     GetSecret { endpoint_id: String },
     /// Rotates an operational webhook endpoint's signing secret.
     ///
     /// The previous secret will remain valid for the next 24 hours.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix operational-webhook endpoint rotate-secret ep_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     RotateSecret {
         endpoint_id: String,
         operational_webhook_endpoint_secret_in:

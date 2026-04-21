@@ -21,17 +21,38 @@ pub enum StreamingCommands {
     Sink(StreamingSinkArgs),
     Stream(StreamingStreamArgs),
     /// Get the HTTP sink headers. Only valid for `http` or `otelTracing` sinks.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming sink-headers-get strm_000000000000000000000 sink_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     SinkHeadersGet {
         stream_id: String,
         sink_id: String,
     },
     /// Updates the Sink's headers. Only valid for `http` or `otelTracing` sinks.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming sink-headers-patch strm_000000000000000000000 sink_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     SinkHeadersPatch {
         stream_id: String,
         sink_id: String,
         http_sink_headers_patch_in: crate::json::JsonOf<HttpSinkHeadersPatchIn>,
     },
     /// Get the transformation code associated with this sink.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming sink-transformation-get strm_000000000000000000000 sink_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     SinkTransformationGet {
         stream_id: String,
         sink_id: String,

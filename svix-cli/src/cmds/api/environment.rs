@@ -41,6 +41,13 @@ pub enum EnvironmentCommands {
     ///
     /// Note that the schema for [`EnvironmentOut`] is subject to change. The fields
     /// herein are provided for convenience but should be treated as JSON blobs.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix environment export\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Export {
         #[clap(flatten)]
         options: EnvironmentExportOptions,
@@ -51,6 +58,13 @@ pub enum EnvironmentCommands {
     ///
     /// Note that the schema for [`EnvironmentIn`] is subject to change. The fields
     /// herein are provided for convenience but should be treated as JSON blobs.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix environment import\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Import {
         environment_in: Option<crate::json::JsonOf<EnvironmentIn>>,
         #[clap(flatten)]

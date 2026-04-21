@@ -57,26 +57,68 @@ pub struct ConnectorArgs {
 #[derive(Subcommand)]
 pub enum ConnectorCommands {
     /// List all connectors for an application.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix connector list\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     List {
         #[clap(flatten)]
         options: ConnectorListOptions,
     },
     /// Create a new connector.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix connector create\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Create {
         connector_in: crate::json::JsonOf<ConnectorIn>,
         #[clap(flatten)]
         options: ConnectorCreateOptions,
     },
     /// Get a connector.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix connector get CONNECTOR_ID\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Get { id: String },
     /// Update a connector.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix connector update CONNECTOR_ID\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Update {
         id: String,
         connector_update: crate::json::JsonOf<ConnectorUpdate>,
     },
     /// Delete a connector.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix connector delete CONNECTOR_ID\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Delete { id: String },
     /// Partially update a connector.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix connector patch CONNECTOR_ID\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Patch {
         id: String,
         connector_patch: Option<crate::json::JsonOf<ConnectorPatch>>,

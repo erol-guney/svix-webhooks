@@ -4,6 +4,18 @@
 {% if resource.name == "application" %}{% set resource_id_name = "app_id" %}{% endif -%}
 {% if resource.name == "message" %}{% set resource_id_name = "msg_id" %}{% endif -%}
 {% if resource.name == "integration" %}{% set resource_id_name = "integ_id" %}{% endif -%}
+{% set path_param_examples = {
+    "app_id": "app_000000000000000000000000000",
+    "msg_id": "msg_000000000000000000000000000",
+    "endpoint_id": "ep_000000000000000000000000000",
+    "integ_id": "integ_000000000000000000000000000",
+    "attempt_id": "atmpt_000000000000000000000000000",
+    "stream_id": "strm_000000000000000000000",
+    "sink_id": "sink_000000000000000000000",
+    "source_id": "src_000000000000000000000",
+    "task_id": "qtask_000000000000000000000000000",
+    "event_type_name": "example.event",
+} -%}
 
 use clap::{Args, Subcommand};
 use svix::api::*;
@@ -96,6 +108,13 @@ pub enum {{ resource_type_name }}Commands {
         {% if op.description is defined -%}
             {{ op.description | to_doc_comment(style="rust") }}
         {% endif -%}
+        #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix {{ resource.name | replace(".", " ") }} {{ op.name }}{% for p in op.path_params %} {{ path_param_examples[p] | default(p | upper) }}{% endfor %}\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
         {{ op.name | to_upper_camel_case }} {
             {# path parameters -#}
             {% for p in op.path_params -%}

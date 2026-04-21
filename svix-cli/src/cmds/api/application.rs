@@ -67,26 +67,68 @@ pub struct ApplicationArgs {
 #[derive(Subcommand)]
 pub enum ApplicationCommands {
     /// List of all the organization's applications.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix application list\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     List {
         #[clap(flatten)]
         options: ApplicationListOptions,
     },
     /// Create a new application.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix application create\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Create {
         application_in: crate::json::JsonOf<ApplicationIn>,
         #[clap(flatten)]
         options: ApplicationCreateOptions,
     },
     /// Get an application.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix application get app_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Get { id: String },
     /// Update an application.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix application update app_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Update {
         id: String,
         application_in: crate::json::JsonOf<ApplicationIn>,
     },
     /// Delete an application.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix application delete app_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Delete { id: String },
     /// Partially update an application.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix application patch app_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Patch {
         id: String,
         application_patch: Option<crate::json::JsonOf<ApplicationPatch>>,

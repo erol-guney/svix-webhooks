@@ -29,6 +29,13 @@ pub enum IngestCommands {
     Endpoint(IngestEndpointArgs),
     Source(IngestSourceArgs),
     /// Get access to the Ingest Source Consumer Portal.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix ingest dashboard src_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Dashboard {
         source_id: String,
         ingest_source_consumer_portal_access_in:

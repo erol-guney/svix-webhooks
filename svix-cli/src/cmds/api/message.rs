@@ -139,6 +139,13 @@ pub enum MessageCommands {
     /// relative to now or, if an iterator is provided, 90 days before/after the time indicated
     /// by the iterator ID. If you require data beyond those time ranges, you will need to explicitly
     /// set the `before` or `after` parameter as appropriate.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix message list app_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     List {
         app_id: String,
         #[clap(flatten)]
@@ -153,6 +160,13 @@ pub enum MessageCommands {
     /// Messages can also have `channels`, which similar to event types let endpoints filter by them. Unlike event types, messages can have multiple channels, and channels don't imply a specific message content or schema.
     ///
     /// The `payload` property is the webhook's body (the actual webhook message). Svix supports payload sizes of up to 1MiB, though it's generally a good idea to keep webhook payloads small, probably no larger than 40kb.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix message create app_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Create {
         app_id: String,
         message_in: crate::json::JsonOf<MessageIn>,
@@ -174,6 +188,13 @@ pub enum MessageCommands {
     ///   }
     /// }
     /// ```
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix message expunge-all-contents app_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     ExpungeAllContents {
         app_id: String,
         #[clap(flatten)]
@@ -185,6 +206,13 @@ pub enum MessageCommands {
     /// Note: most people shouldn't be using this API. Svix doesn't bill you for
     /// messages not actually sent, so using this API doesn't save money.
     /// If unsure, please ask Svix support before using this API.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix message precheck app_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Precheck {
         app_id: String,
         message_precheck_in: crate::json::JsonOf<MessagePrecheckIn>,
@@ -192,6 +220,13 @@ pub enum MessageCommands {
         options: MessagePrecheckOptions,
     },
     /// Get a message by its ID or eventID.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix message get app_000000000000000000000000000 msg_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Get {
         app_id: String,
         id: String,
@@ -202,6 +237,13 @@ pub enum MessageCommands {
     ///
     /// Useful in cases when a message was accidentally sent with sensitive content.
     /// The message can't be replayed or resent once its payload has been deleted or expired.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix message expunge-content app_000000000000000000000000000 msg_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     ExpungeContent {
         app_id: String,
         id: String,

@@ -52,6 +52,13 @@ pub struct StreamingEventsArgs {
 #[derive(Subcommand)]
 pub enum StreamingEventsCommands {
     /// Creates events on the Stream.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming events create strm_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Create {
         stream_id: String,
         create_stream_events_in: crate::json::JsonOf<CreateStreamEventsIn>,
@@ -61,6 +68,13 @@ pub enum StreamingEventsCommands {
     /// Iterate over a stream of events.
     ///
     /// The sink must be of type `poller` to use the poller endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming events get strm_000000000000000000000 sink_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Get {
         stream_id: String,
         sink_id: String,

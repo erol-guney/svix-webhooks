@@ -79,6 +79,13 @@ pub struct MessagePollerArgs {
 #[derive(Subcommand)]
 pub enum MessagePollerCommands {
     /// Reads the stream of created messages for an application, filtered on the Sink's event types and Channels.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix message poller poll app_000000000000000000000000000 sink_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Poll {
         app_id: String,
         sink_id: String,
@@ -87,6 +94,13 @@ pub enum MessagePollerCommands {
     },
     /// Reads the stream of created messages for an application, filtered on the Sink's event types and
     /// Channels, using server-managed iterator tracking.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix message poller consumer-poll app_000000000000000000000000000 sink_000000000000000000000 CONSUMER_ID\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     ConsumerPoll {
         app_id: String,
         sink_id: String,
@@ -95,6 +109,13 @@ pub enum MessagePollerCommands {
         options: MessagePollerConsumerPollOptions,
     },
     /// Sets the starting offset for the consumer of a polling endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix message poller consumer-seek app_000000000000000000000000000 sink_000000000000000000000 CONSUMER_ID\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     ConsumerSeek {
         app_id: String,
         sink_id: String,

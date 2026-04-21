@@ -66,12 +66,26 @@ pub struct StreamingSinkArgs {
 #[derive(Subcommand)]
 pub enum StreamingSinkCommands {
     /// List of all the stream's sinks.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming sink list strm_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     List {
         stream_id: String,
         #[clap(flatten)]
         options: StreamingSinkListOptions,
     },
     /// Creates a new sink.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming sink create strm_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Create {
         stream_id: String,
         stream_sink_in: Option<crate::json::JsonOf<StreamSinkIn>>,
@@ -79,16 +93,44 @@ pub enum StreamingSinkCommands {
         options: StreamingSinkCreateOptions,
     },
     /// Get a sink by id or uid.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming sink get strm_000000000000000000000 sink_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Get { stream_id: String, sink_id: String },
     /// Update a sink.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming sink update strm_000000000000000000000 sink_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Update {
         stream_id: String,
         sink_id: String,
         stream_sink_in: Option<crate::json::JsonOf<StreamSinkIn>>,
     },
     /// Delete a sink.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming sink delete strm_000000000000000000000 sink_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Delete { stream_id: String, sink_id: String },
     /// Partially update a sink.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming sink patch strm_000000000000000000000 sink_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Patch {
         stream_id: String,
         sink_id: String,
@@ -99,8 +141,22 @@ pub enum StreamingSinkCommands {
     /// This is used to verify the authenticity of the delivery.
     ///
     /// For more information please refer to [the consuming webhooks docs](https://docs.svix.com/consuming-webhooks/).
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming sink get-secret strm_000000000000000000000 sink_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     GetSecret { stream_id: String, sink_id: String },
     /// Rotates the signing secret (only supported for http sinks).
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming sink rotate-secret strm_000000000000000000000 sink_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     RotateSecret {
         stream_id: String,
         sink_id: String,
@@ -109,6 +165,13 @@ pub enum StreamingSinkCommands {
         options: StreamingSinkRotateSecretOptions,
     },
     /// Set or unset the transformation code associated with this sink.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming sink transformation-partial-update strm_000000000000000000000 sink_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     TransformationPartialUpdate {
         stream_id: String,
         sink_id: String,

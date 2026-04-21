@@ -66,12 +66,26 @@ pub struct IngestEndpointArgs {
 #[derive(Subcommand)]
 pub enum IngestEndpointCommands {
     /// List ingest endpoints.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix ingest endpoint list src_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     List {
         source_id: String,
         #[clap(flatten)]
         options: IngestEndpointListOptions,
     },
     /// Create an ingest endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix ingest endpoint create src_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Create {
         source_id: String,
         ingest_endpoint_in: crate::json::JsonOf<IngestEndpointIn>,
@@ -79,27 +93,62 @@ pub enum IngestEndpointCommands {
         options: IngestEndpointCreateOptions,
     },
     /// Get an ingest endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix ingest endpoint get src_000000000000000000000 ep_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Get {
         source_id: String,
         endpoint_id: String,
     },
     /// Update an ingest endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix ingest endpoint update src_000000000000000000000 ep_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Update {
         source_id: String,
         endpoint_id: String,
         ingest_endpoint_update: crate::json::JsonOf<IngestEndpointUpdate>,
     },
     /// Delete an ingest endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix ingest endpoint delete src_000000000000000000000 ep_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Delete {
         source_id: String,
         endpoint_id: String,
     },
     /// Get the additional headers to be sent with the ingest.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix ingest endpoint get-headers src_000000000000000000000 ep_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     GetHeaders {
         source_id: String,
         endpoint_id: String,
     },
     /// Set the additional headers to be sent to the endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix ingest endpoint update-headers src_000000000000000000000 ep_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     UpdateHeaders {
         source_id: String,
         endpoint_id: String,
@@ -109,6 +158,13 @@ pub enum IngestEndpointCommands {
     ///
     /// This is used to verify the authenticity of the webhook.
     /// For more information please refer to [the consuming webhooks docs](https://docs.svix.com/consuming-webhooks/).
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix ingest endpoint get-secret src_000000000000000000000 ep_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     GetSecret {
         source_id: String,
         endpoint_id: String,
@@ -116,6 +172,13 @@ pub enum IngestEndpointCommands {
     /// Rotates an ingest endpoint's signing secret.
     ///
     /// The previous secret will remain valid for the next 24 hours.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix ingest endpoint rotate-secret src_000000000000000000000 ep_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     RotateSecret {
         source_id: String,
         endpoint_id: String,
@@ -124,11 +187,25 @@ pub enum IngestEndpointCommands {
         options: IngestEndpointRotateSecretOptions,
     },
     /// Get the transformation code associated with this ingest endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix ingest endpoint get-transformation src_000000000000000000000 ep_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     GetTransformation {
         source_id: String,
         endpoint_id: String,
     },
     /// Set or unset the transformation code associated with this ingest endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix ingest endpoint set-transformation src_000000000000000000000 ep_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     SetTransformation {
         source_id: String,
         endpoint_id: String,

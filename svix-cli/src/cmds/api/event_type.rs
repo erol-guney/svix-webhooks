@@ -90,6 +90,13 @@ pub struct EventTypeArgs {
 #[derive(Subcommand)]
 pub enum EventTypeCommands {
     /// Return the list of event types.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix event-type list\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     List {
         #[clap(flatten)]
         options: EventTypeListOptions,
@@ -99,6 +106,13 @@ pub enum EventTypeCommands {
     /// Unarchiving an event type will allow endpoints to filter on it and messages to be sent with it.
     /// Endpoints filtering on the event type before archival will continue to filter on it.
     /// This operation does not preserve the description and schemas.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix event-type create\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Create {
         event_type_in: crate::json::JsonOf<EventTypeIn>,
         #[clap(flatten)]
@@ -109,14 +123,35 @@ pub enum EventTypeCommands {
     /// If an existing `archived` event type is updated, it will be unarchived.
     /// The importer will convert all webhooks found in the either the `webhooks` or `x-webhooks`
     /// top-level.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix event-type import-openapi\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     ImportOpenapi {
         event_type_import_open_api_in: Option<crate::json::JsonOf<EventTypeImportOpenApiIn>>,
         #[clap(flatten)]
         options: EventTypeImportOpenapiOptions,
     },
     /// Get an event type.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix event-type get example.event\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Get { event_type_name: String },
     /// Update an event type.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix event-type update example.event\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Update {
         event_type_name: String,
         event_type_update: crate::json::JsonOf<EventTypeUpdate>,
@@ -127,12 +162,26 @@ pub enum EventTypeCommands {
     /// However, new messages can not be sent with it and endpoints can not filter on it.
     /// An event type can be unarchived with the
     /// [create operation](#operation/create_event_type_api_v1_event_type__post).
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix event-type delete example.event\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Delete {
         event_type_name: String,
         #[clap(flatten)]
         options: EventTypeDeleteOptions,
     },
     /// Partially update an event type.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix event-type patch example.event\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Patch {
         event_type_name: String,
         event_type_patch: Option<crate::json::JsonOf<EventTypePatch>>,

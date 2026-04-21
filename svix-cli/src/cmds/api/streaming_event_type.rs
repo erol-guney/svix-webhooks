@@ -72,30 +72,72 @@ pub struct StreamingEventTypeArgs {
 #[derive(Subcommand)]
 pub enum StreamingEventTypeCommands {
     /// List of all the organization's event types for streaming.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming event-type list\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     List {
         #[clap(flatten)]
         options: StreamingEventTypeListOptions,
     },
     /// Create an event type for Streams.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming event-type create\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Create {
         stream_event_type_in: crate::json::JsonOf<StreamEventTypeIn>,
         #[clap(flatten)]
         options: StreamingEventTypeCreateOptions,
     },
     /// Get an event type.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming event-type get NAME\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Get { name: String },
     /// Update or create a event type for Streams.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming event-type update NAME\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Update {
         name: String,
         stream_event_type_in: crate::json::JsonOf<StreamEventTypeIn>,
     },
     /// Delete an event type.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming event-type delete NAME\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Delete {
         name: String,
         #[clap(flatten)]
         options: StreamingEventTypeDeleteOptions,
     },
     /// Patch an event type for Streams.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming event-type patch NAME\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Patch {
         name: String,
         stream_event_type_patch: Option<crate::json::JsonOf<StreamEventTypePatch>>,

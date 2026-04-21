@@ -66,12 +66,26 @@ pub struct IntegrationArgs {
 #[derive(Subcommand)]
 pub enum IntegrationCommands {
     /// List the application's integrations.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix integration list app_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     List {
         app_id: String,
         #[clap(flatten)]
         options: IntegrationListOptions,
     },
     /// Create an integration.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix integration create app_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Create {
         app_id: String,
         integration_in: crate::json::JsonOf<IntegrationIn>,
@@ -79,18 +93,53 @@ pub enum IntegrationCommands {
         options: IntegrationCreateOptions,
     },
     /// Get an integration.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix integration get app_000000000000000000000000000 integ_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Get { app_id: String, id: String },
     /// Update an integration.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix integration update app_000000000000000000000000000 integ_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Update {
         app_id: String,
         id: String,
         integration_update: crate::json::JsonOf<IntegrationUpdate>,
     },
     /// Delete an integration.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix integration delete app_000000000000000000000000000 integ_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Delete { app_id: String, id: String },
     /// Get an integration's key.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix integration get-key app_000000000000000000000000000 integ_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     GetKey { app_id: String, id: String },
     /// Rotate the integration's key. The previous key will be immediately revoked.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix integration rotate-key app_000000000000000000000000000 integ_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     RotateKey {
         app_id: String,
         id: String,

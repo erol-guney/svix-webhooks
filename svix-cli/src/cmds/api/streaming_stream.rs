@@ -53,26 +53,68 @@ pub struct StreamingStreamArgs {
 #[derive(Subcommand)]
 pub enum StreamingStreamCommands {
     /// List of all the organization's streams.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming stream list\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     List {
         #[clap(flatten)]
         options: StreamingStreamListOptions,
     },
     /// Creates a new stream.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming stream create\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Create {
         stream_in: crate::json::JsonOf<StreamIn>,
         #[clap(flatten)]
         options: StreamingStreamCreateOptions,
     },
     /// Get a stream by id or uid.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming stream get strm_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Get { stream_id: String },
     /// Update a stream.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming stream update strm_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Update {
         stream_id: String,
         stream_in: crate::json::JsonOf<StreamIn>,
     },
     /// Delete a stream.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming stream delete strm_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Delete { stream_id: String },
     /// Partially update a stream.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix streaming stream patch strm_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Patch {
         stream_id: String,
         stream_patch: Option<crate::json::JsonOf<StreamPatch>>,

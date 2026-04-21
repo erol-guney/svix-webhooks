@@ -111,6 +111,13 @@ pub struct AuthenticationArgs {
 #[derive(Subcommand)]
 pub enum AuthenticationCommands {
     /// Use this function to get magic links (and authentication codes) for connecting your users to the Consumer Application Portal.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix authentication app-portal-access app_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     AppPortalAccess {
         app_id: String,
         app_portal_access_in: Option<crate::json::JsonOf<AppPortalAccessIn>>,
@@ -118,6 +125,13 @@ pub enum AuthenticationCommands {
         options: AuthenticationAppPortalAccessOptions,
     },
     /// Expire all of the tokens associated with a specific application.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix authentication expire-all app_000000000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     ExpireAll {
         app_id: String,
         application_token_expire_in: Option<crate::json::JsonOf<ApplicationTokenExpireIn>>,
@@ -127,6 +141,13 @@ pub enum AuthenticationCommands {
     /// Logout an app token.
     ///
     /// Trying to log out other tokens will fail.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix authentication logout\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     Logout {
         #[clap(flatten)]
         options: AuthenticationLogoutOptions,
@@ -134,11 +155,25 @@ pub enum AuthenticationCommands {
     /// Logout a stream token.
     ///
     /// Trying to log out other tokens will fail.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix authentication stream-logout\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     StreamLogout {
         #[clap(flatten)]
         options: AuthenticationStreamLogoutOptions,
     },
     /// Use this function to get magic links (and authentication codes) for connecting your users to the Stream Consumer Portal.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix authentication stream-portal-access strm_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     StreamPortalAccess {
         stream_id: String,
         stream_portal_access_in: Option<crate::json::JsonOf<StreamPortalAccessIn>>,
@@ -146,6 +181,13 @@ pub enum AuthenticationCommands {
         options: AuthenticationStreamPortalAccessOptions,
     },
     /// Expire all of the tokens associated with a specific stream.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix authentication stream-expire-all strm_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     StreamExpireAll {
         stream_id: String,
         stream_token_expire_in: Option<crate::json::JsonOf<StreamTokenExpireIn>>,
@@ -153,8 +195,22 @@ pub enum AuthenticationCommands {
         options: AuthenticationStreamExpireAllOptions,
     },
     /// Get the current auth token for the stream poller.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix authentication get-stream-poller-token strm_000000000000000000000 sink_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     GetStreamPollerToken { stream_id: String, sink_id: String },
     /// Create a new auth token for the stream poller API.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n",
+            "Example:   svix authentication rotate-stream-poller-token strm_000000000000000000000 sink_000000000000000000000\n",
+            "\n",
+            "{all-args}{after-help}",
+        ))]
     RotateStreamPollerToken {
         stream_id: String,
         sink_id: String,
