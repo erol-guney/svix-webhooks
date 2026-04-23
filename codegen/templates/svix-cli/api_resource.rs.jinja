@@ -5,15 +5,15 @@
 {% if resource.name == "message" %}{% set resource_id_name = "msg_id" %}{% endif -%}
 {% if resource.name == "integration" %}{% set resource_id_name = "integ_id" %}{% endif -%}
 {% set path_param_examples = {
-    "app_id": "app_000000000000000000000000000",
-    "msg_id": "msg_000000000000000000000000000",
-    "endpoint_id": "ep_000000000000000000000000000",
-    "integ_id": "integ_000000000000000000000000000",
-    "attempt_id": "atmpt_000000000000000000000000000",
-    "stream_id": "strm_000000000000000000000",
-    "sink_id": "sink_000000000000000000000",
-    "source_id": "src_000000000000000000000",
-    "task_id": "qtask_000000000000000000000000000",
+    "app_id": "app_abc000000000000000000000000",
+    "msg_id": "msg_abc000000000000000000000000",
+    "endpoint_id": "ep_abc000000000000000000000000",
+    "integ_id": "integ_abc000000000000000000000000",
+    "attempt_id": "atmpt_abc000000000000000000000000",
+    "stream_id": "strm_abc000000000000000000",
+    "sink_id": "sink_abc000000000000000000",
+    "source_id": "src_abc000000000000000000",
+    "task_id": "qtask_abc000000000000000000000000",
     "event_type_name": "example.event",
 } -%}
 
@@ -61,10 +61,22 @@ use super::{{ sub.name | to_snake_case }}::{{ sub.name | to_upper_camel_case }}A
     {%- endif -%}
 {%- endmacro -%}
 
+{%- macro render_example_value(value, indent) -%}
+{%- if value is mapping -%}
+{
+{%- for k, v in value | items %}
+{{ indent }}  \"{{ k }}\": {{ render_example_value(v, indent + "  ") }}{{ "," if not loop.last else "" }}
+{%- endfor %}
+{{ indent }}}
+{%- else -%}
+{{ value | tojson | replace('\\', '\\\\') | replace('"', '\\"') }}
+{%- endif -%}
+{%- endmacro -%}
+
 {%- macro render_inline_object(schema, api, indent) -%}
 {
 {%- for f in schema.fields %}
-{{ indent }}  \"{{ f.name }}\": {% if f.example is defined %}{{ f.example | tojson | replace('\\', '\\\\') | replace('"', '\\"') }}{% else %}{{ get_type_example(f, api, indent + "  ") }}{% endif %}{{ "," if not loop.last else "" }}
+{{ indent }}  \"{{ f.name }}\": {% if f.example is defined %}{{ render_example_value(f.example, indent + "  ") }}{% else %}{{ get_type_example(f, api, indent + "  ") }}{% endif %}{{ "," if not loop.last else "" }}
 {%- endfor %}
 {{ indent }}}
 {%- endmacro -%}
@@ -73,7 +85,7 @@ use super::{{ sub.name | to_snake_case }}::{{ sub.name | to_upper_camel_case }}A
 \x1b[1;4m{{ title }}:\x1b[0m
 {
 {%- for field in schema.fields | selectattr("positional", "false") %}
-  \"{{ field.name }}\": {% if field.example is defined %}{{ field.example | tojson | replace('\\', '\\\\') | replace('"', '\\"') }}{% else %}{{ get_type_example(field, api, "  ") }}{% endif %}{{ "," if not loop.last else "" }}
+  \"{{ field.name }}\": {% if field.example is defined %}{{ render_example_value(field.example, "  ") }}{% else %}{{ get_type_example(field, api, "  ") }}{% endif %}{{ "," if not loop.last else "" }}
 {%- endfor %}
 }
 {%- endmacro -%}
@@ -164,14 +176,14 @@ pub enum {{ resource_type_name }}Commands {
         {% endif -%}
         #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix {{ resource.name | replace(".", " ") }} {{ op.name }}{% for p in op.path_params %} {{ path_param_examples[p] | default(p | upper) }}{% endfor %}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix {{ resource.name | replace(".", " ") }} {{ op.name }}{% for p in op.path_params %} {{ path_param_examples[p] | default(p | upper) }}{% endfor %}{% if op.request_body_schema_name is defined %} {...}{% endif %}\n",
             "{after-help}",
             "\n",
             "{all-args}",
         ))]
         {% if op.request_body_schema_name is defined or op.response_body_schema_name is defined -%}
-        #[command(after_long_help = "\n
+        #[command(after_help = "
         {%- if op.request_body_schema_name is defined -%}
             {{- render_schema_example("Example body", api.types[op.request_body_schema_name], api) -}}
         {%- endif -%}

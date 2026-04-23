@@ -68,11 +68,25 @@ pub enum IntegrationCommands {
     /// List the application's integrations.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix integration list app_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix integration list app_abc000000000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"data\": [{
+    \"createdAt\": \"2030-01-01T00:00:00Z\",
+    \"featureFlags\": [],
+    \"id\": \"integ_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"name\": \"Example Integration\",
+    \"updatedAt\": \"2030-01-01T00:00:00Z\"
+  }],
+  \"done\": true,
+  \"iterator\": \"iterator\",
+  \"prevIterator\": \"-iterator\"
+}\n")]
     List {
         app_id: String,
         #[clap(flatten)]
@@ -81,11 +95,24 @@ pub enum IntegrationCommands {
     /// Create an integration.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix integration create app_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix integration create app_abc000000000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"featureFlags\": [],
+  \"name\": \"Example Integration\"
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"featureFlags\": [],
+  \"id\": \"integ_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"name\": \"Example Integration\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Create {
         app_id: String,
         integration_in: crate::json::JsonOf<IntegrationIn>,
@@ -95,20 +122,42 @@ pub enum IntegrationCommands {
     /// Get an integration.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix integration get app_000000000000000000000000000 integ_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix integration get app_abc000000000000000000000000 integ_abc000000000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"featureFlags\": [],
+  \"id\": \"integ_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"name\": \"Example Integration\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Get { app_id: String, id: String },
     /// Update an integration.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix integration update app_000000000000000000000000000 integ_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix integration update app_abc000000000000000000000000 integ_abc000000000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"featureFlags\": [],
+  \"name\": \"Example Integration\"
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"featureFlags\": [],
+  \"id\": \"integ_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"name\": \"Example Integration\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Update {
         app_id: String,
         id: String,
@@ -117,29 +166,40 @@ pub enum IntegrationCommands {
     /// Delete an integration.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix integration delete app_000000000000000000000000000 integ_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix integration delete app_abc000000000000000000000000 integ_abc000000000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
     Delete { app_id: String, id: String },
     /// Get an integration's key.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix integration get-key app_000000000000000000000000000 integ_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix integration get-key app_abc000000000000000000000000 integ_abc000000000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"key\": \"integsk_kV3ts5tKPNJN4Dl25cMTfUNdmabxbX0O\"
+}\n")]
     GetKey { app_id: String, id: String },
     /// Rotate the integration's key. The previous key will be immediately revoked.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix integration rotate-key app_000000000000000000000000000 integ_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix integration rotate-key app_abc000000000000000000000000 integ_abc000000000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"key\": \"integsk_kV3ts5tKPNJN4Dl25cMTfUNdmabxbX0O\"
+}\n")]
     RotateKey {
         app_id: String,
         id: String,

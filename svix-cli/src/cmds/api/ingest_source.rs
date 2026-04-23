@@ -68,11 +68,19 @@ pub enum IngestSourceCommands {
     /// List of all the organization's Ingest Sources.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix ingest source list\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest source list\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"data\": [{\"...\": \"...\"}],
+  \"done\": true,
+  \"iterator\": \"iterator\",
+  \"prevIterator\": \"-iterator\"
+}\n")]
     List {
         #[clap(flatten)]
         options: IngestSourceListOptions,
@@ -80,11 +88,27 @@ pub enum IngestSourceCommands {
     /// Create Ingest Source.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix ingest source create\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest source create {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"...\",
+  \"uid\": \"unique-identifier\"
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"id\": \"src_2yZwUhtgs5Ai8T9yRQJXA\",
+  \"ingestUrl\": \"...\",
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"...\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Create {
         ingest_source_in: crate::json::JsonOf<IngestSourceIn>,
         #[clap(flatten)]
@@ -93,20 +117,47 @@ pub enum IngestSourceCommands {
     /// Get an Ingest Source by id or uid.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix ingest source get src_000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest source get src_abc000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"id\": \"src_2yZwUhtgs5Ai8T9yRQJXA\",
+  \"ingestUrl\": \"...\",
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"...\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Get { source_id: String },
     /// Update an Ingest Source.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix ingest source update src_000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest source update src_abc000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"...\",
+  \"uid\": \"unique-identifier\"
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"id\": \"src_2yZwUhtgs5Ai8T9yRQJXA\",
+  \"ingestUrl\": \"...\",
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"...\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Update {
         source_id: String,
         ingest_source_in: crate::json::JsonOf<IngestSourceIn>,
@@ -114,10 +165,11 @@ pub enum IngestSourceCommands {
     /// Delete an Ingest Source.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix ingest source delete src_000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest source delete src_abc000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
     Delete { source_id: String },
     /// Rotate the Ingest Source's Url Token.
@@ -128,11 +180,16 @@ pub enum IngestSourceCommands {
     /// rotated a maximum of three times within the 48-hour period.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix ingest source rotate-token src_000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest source rotate-token src_abc000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"ingestUrl\": \"...\"
+}\n")]
     RotateToken {
         source_id: String,
         #[clap(flatten)]

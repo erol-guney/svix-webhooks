@@ -23,11 +23,20 @@ pub enum StreamingCommands {
     /// Get the HTTP sink headers. Only valid for `http` or `otelTracing` sinks.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix streaming sink-headers-get strm_000000000000000000000 sink_000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming sink-headers-get strm_abc000000000000000000 sink_abc000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"headers\": {
+    \"X-Example\": \"123\",
+    \"X-Foobar\": \"Bar\"
+  },
+  \"sensitive\": [\"Authorization\"]
+}\n")]
     SinkHeadersGet {
         stream_id: String,
         sink_id: String,
@@ -35,11 +44,26 @@ pub enum StreamingCommands {
     /// Updates the Sink's headers. Only valid for `http` or `otelTracing` sinks.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix streaming sink-headers-patch strm_000000000000000000000 sink_000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming sink-headers-patch strm_abc000000000000000000 sink_abc000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"headers\": {
+    \"X-Example\": \"123\",
+    \"X-Foobar\": \"Bar\"
+  }
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"headers\": {
+    \"X-Example\": \"123\",
+    \"X-Foobar\": \"Bar\"
+  },
+  \"sensitive\": [\"Authorization\"]
+}\n")]
     SinkHeadersPatch {
         stream_id: String,
         sink_id: String,
@@ -48,11 +72,17 @@ pub enum StreamingCommands {
     /// Get the transformation code associated with this sink.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix streaming sink-transformation-get strm_000000000000000000000 sink_000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming sink-transformation-get strm_abc000000000000000000 sink_abc000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"code\": \"...\",
+  \"enabled\": true
+}\n")]
     SinkTransformationGet {
         stream_id: String,
         sink_id: String,

@@ -59,11 +59,35 @@ pub enum ConnectorCommands {
     /// List all connectors for an application.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix connector list\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix connector list\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"data\": [{
+    \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
+    \"createdAt\": \"2030-01-01T00:00:00Z\",
+    \"description\": \"...\",
+    \"featureFlags\": [\"cool-new-feature\"],
+    \"id\": \"trtmpl_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"instructions\": \"...\",
+    \"kind\": \"Custom\",
+    \"logo\": \"...\",
+    \"name\": \"...\",
+    \"orgId\": \"org_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"productType\": \"Dispatch\",
+    \"transformation\": \"...\",
+    \"transformationUpdatedAt\": \"2030-01-01T00:00:00Z\",
+    \"uid\": \"unique-identifier\",
+    \"updatedAt\": \"2030-01-01T00:00:00Z\"
+  }],
+  \"done\": true,
+  \"iterator\": \"iterator\",
+  \"prevIterator\": \"-iterator\"
+}\n")]
     List {
         #[clap(flatten)]
         options: ConnectorListOptions,
@@ -71,11 +95,42 @@ pub enum ConnectorCommands {
     /// Create a new connector.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix connector create\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix connector create {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
+  \"description\": \"Example connector description\",
+  \"featureFlags\": [\"...\"],
+  \"instructions\": \"Markdown-formatted instructions\",
+  \"kind\": \"Slack\",
+  \"logo\": \"https://example.com/logo.png\",
+  \"name\": \"My first connector\",
+  \"productType\": \"Dispatch\",
+  \"transformation\": \"function handler(webhook) { /* ... */ }\",
+  \"uid\": \"unique-identifier\"
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"description\": \"...\",
+  \"featureFlags\": [\"cool-new-feature\"],
+  \"id\": \"trtmpl_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"instructions\": \"...\",
+  \"kind\": \"Custom\",
+  \"logo\": \"...\",
+  \"name\": \"...\",
+  \"orgId\": \"org_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"productType\": \"Dispatch\",
+  \"transformation\": \"...\",
+  \"transformationUpdatedAt\": \"2030-01-01T00:00:00Z\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Create {
         connector_in: crate::json::JsonOf<ConnectorIn>,
         #[clap(flatten)]
@@ -84,20 +139,68 @@ pub enum ConnectorCommands {
     /// Get a connector.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix connector get CONNECTOR_ID\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix connector get CONNECTOR_ID\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"description\": \"...\",
+  \"featureFlags\": [\"cool-new-feature\"],
+  \"id\": \"trtmpl_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"instructions\": \"...\",
+  \"kind\": \"Custom\",
+  \"logo\": \"...\",
+  \"name\": \"...\",
+  \"orgId\": \"org_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"productType\": \"Dispatch\",
+  \"transformation\": \"...\",
+  \"transformationUpdatedAt\": \"2030-01-01T00:00:00Z\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Get { id: String },
     /// Update a connector.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix connector update CONNECTOR_ID\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix connector update CONNECTOR_ID {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
+  \"description\": \"Example connector description\",
+  \"featureFlags\": [\"cool-new-feature\"],
+  \"instructions\": \"Markdown-formatted instructions\",
+  \"kind\": \"Slack\",
+  \"logo\": \"https://example.com/logo.png\",
+  \"name\": \"My first connector\",
+  \"transformation\": \"function handler(webhook) { /* ... */ }\"
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"description\": \"...\",
+  \"featureFlags\": [\"cool-new-feature\"],
+  \"id\": \"trtmpl_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"instructions\": \"...\",
+  \"kind\": \"Custom\",
+  \"logo\": \"...\",
+  \"name\": \"...\",
+  \"orgId\": \"org_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"productType\": \"Dispatch\",
+  \"transformation\": \"...\",
+  \"transformationUpdatedAt\": \"2030-01-01T00:00:00Z\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Update {
         id: String,
         connector_update: crate::json::JsonOf<ConnectorUpdate>,
@@ -105,20 +208,50 @@ pub enum ConnectorCommands {
     /// Delete a connector.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix connector delete CONNECTOR_ID\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix connector delete CONNECTOR_ID\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
     Delete { id: String },
     /// Partially update a connector.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix connector patch CONNECTOR_ID\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix connector patch CONNECTOR_ID {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
+  \"description\": \"...\",
+  \"featureFlags\": [\"cool-new-feature\"],
+  \"instructions\": \"...\",
+  \"kind\": \"Custom\",
+  \"logo\": \"...\",
+  \"name\": \"...\",
+  \"transformation\": \"...\"
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"description\": \"...\",
+  \"featureFlags\": [\"cool-new-feature\"],
+  \"id\": \"trtmpl_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"instructions\": \"...\",
+  \"kind\": \"Custom\",
+  \"logo\": \"...\",
+  \"name\": \"...\",
+  \"orgId\": \"org_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"productType\": \"Dispatch\",
+  \"transformation\": \"...\",
+  \"transformationUpdatedAt\": \"2030-01-01T00:00:00Z\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Patch {
         id: String,
         connector_patch: Option<crate::json::JsonOf<ConnectorPatch>>,

@@ -43,11 +43,64 @@ pub enum EnvironmentCommands {
     /// herein are provided for convenience but should be treated as JSON blobs.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix environment export\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix environment export\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"connectors\": [{
+    \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
+    \"createdAt\": \"2030-01-01T00:00:00Z\",
+    \"description\": \"...\",
+    \"featureFlags\": [\"cool-new-feature\"],
+    \"id\": \"trtmpl_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"instructions\": \"...\",
+    \"kind\": \"Custom\",
+    \"logo\": \"...\",
+    \"name\": \"...\",
+    \"orgId\": \"org_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"productType\": \"Dispatch\",
+    \"transformation\": \"...\",
+    \"transformationUpdatedAt\": \"2030-01-01T00:00:00Z\",
+    \"uid\": \"unique-identifier\",
+    \"updatedAt\": \"2030-01-01T00:00:00Z\"
+  }],
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"eventTypes\": [{
+    \"archived\": false,
+    \"createdAt\": \"2030-01-01T00:00:00Z\",
+    \"deprecated\": true,
+    \"description\": \"A user has signed up\",
+    \"featureFlag\": \"...\",
+    \"featureFlags\": [\"cool-new-feature\"],
+    \"groupName\": \"user\",
+    \"name\": \"user.signup\",
+    \"schemas\": {
+      \"1\": {
+        \"description\": \"An invoice was paid by a user\",
+        \"properties\": {
+          \"invoiceId\": {
+            \"description\": \"The invoice id\",
+            \"type\": \"string\"
+          },
+          \"userId\": {
+            \"description\": \"The user id\",
+            \"type\": \"string\"
+          }
+        },
+        \"required\": [\"invoiceId\",\"userId\"],
+        \"title\": \"Invoice Paid Event\",
+        \"type\": \"object\"
+      }
+    },
+    \"updatedAt\": \"2030-01-01T00:00:00Z\"
+  }],
+  \"settings\": {\"key\": \"...\"},
+  \"version\": 123
+}\n")]
     Export {
         #[clap(flatten)]
         options: EnvironmentExportOptions,
@@ -60,11 +113,55 @@ pub enum EnvironmentCommands {
     /// herein are provided for convenience but should be treated as JSON blobs.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix environment import\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix environment import {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"connectors\": [{
+    \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
+    \"description\": \"Example connector description\",
+    \"featureFlags\": [\"...\"],
+    \"instructions\": \"Markdown-formatted instructions\",
+    \"kind\": \"Slack\",
+    \"logo\": \"https://example.com/logo.png\",
+    \"name\": \"My first connector\",
+    \"productType\": \"Dispatch\",
+    \"transformation\": \"function handler(webhook) { /* ... */ }\",
+    \"uid\": \"unique-identifier\"
+  }],
+  \"eventTypes\": [{
+    \"archived\": false,
+    \"deprecated\": true,
+    \"description\": \"A user has signed up\",
+    \"featureFlag\": \"...\",
+    \"featureFlags\": [\"cool-new-feature\"],
+    \"groupName\": \"user\",
+    \"name\": \"user.signup\",
+    \"schemas\": {
+      \"1\": {
+        \"description\": \"An invoice was paid by a user\",
+        \"properties\": {
+          \"invoiceId\": {
+            \"description\": \"The invoice id\",
+            \"type\": \"string\"
+          },
+          \"userId\": {
+            \"description\": \"The user id\",
+            \"type\": \"string\"
+          }
+        },
+        \"required\": [\"invoiceId\",\"userId\"],
+        \"title\": \"Invoice Paid Event\",
+        \"type\": \"object\"
+      }
+    }
+  }],
+  \"settings\": {\"key\": \"...\"}
+}\n")]
     Import {
         environment_in: Option<crate::json::JsonOf<EnvironmentIn>>,
         #[clap(flatten)]

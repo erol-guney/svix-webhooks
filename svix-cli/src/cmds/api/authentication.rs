@@ -113,11 +113,31 @@ pub enum AuthenticationCommands {
     /// Use this function to get magic links (and authentication codes) for connecting your users to the Consumer Application Portal.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix authentication app-portal-access app_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix authentication app-portal-access app_abc000000000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"application\": {
+    \"metadata\": {\"key\": \"...\"},
+    \"name\": \"My first application\",
+    \"rateLimit\": 123,
+    \"throttleRate\": 123,
+    \"uid\": \"unique-identifier\"
+  },
+  \"capabilities\": [\"ViewBase\",\"ViewEndpointSecret\"],
+  \"expiry\": 123,
+  \"featureFlags\": [],
+  \"readOnly\": true,
+  \"sessionId\": \"user_1FB8\"
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"token\": \"appsk_kV3ts5tKPNJN4Dl25cMTfUNdmabxbX0O\",
+  \"url\": \"https://app.svix.com/login#key=eyJhcHBJZCI6ICJhcHBfMXRSdFl\"
+}\n")]
     AppPortalAccess {
         app_id: String,
         app_portal_access_in: Option<crate::json::JsonOf<AppPortalAccessIn>>,
@@ -127,11 +147,17 @@ pub enum AuthenticationCommands {
     /// Expire all of the tokens associated with a specific application.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix authentication expire-all app_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix authentication expire-all app_abc000000000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"expiry\": 60,
+  \"sessionIds\": [\"...\"]
+}\n")]
     ExpireAll {
         app_id: String,
         application_token_expire_in: Option<crate::json::JsonOf<ApplicationTokenExpireIn>>,
@@ -143,10 +169,11 @@ pub enum AuthenticationCommands {
     /// Trying to log out other tokens will fail.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix authentication logout\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix authentication logout\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
     Logout {
         #[clap(flatten)]
@@ -157,10 +184,11 @@ pub enum AuthenticationCommands {
     /// Trying to log out other tokens will fail.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix authentication stream-logout\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix authentication stream-logout\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
     StreamLogout {
         #[clap(flatten)]
@@ -169,11 +197,22 @@ pub enum AuthenticationCommands {
     /// Use this function to get magic links (and authentication codes) for connecting your users to the Stream Consumer Portal.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix authentication stream-portal-access strm_000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix authentication stream-portal-access strm_abc000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"expiry\": 123,
+  \"featureFlags\": [],
+  \"sessionId\": \"user_1FB8\"
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"token\": \"appsk_kV3ts5tKPNJN4Dl25cMTfUNdmabxbX0O\",
+  \"url\": \"https://app.svix.com/login#key=eyJhcHBJZCI6ICJhcHBfMXRSdFl\"
+}\n")]
     StreamPortalAccess {
         stream_id: String,
         stream_portal_access_in: Option<crate::json::JsonOf<StreamPortalAccessIn>>,
@@ -183,11 +222,17 @@ pub enum AuthenticationCommands {
     /// Expire all of the tokens associated with a specific stream.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix authentication stream-expire-all strm_000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix authentication stream-expire-all strm_abc000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"expiry\": 60,
+  \"sessionIds\": [\"...\"]
+}\n")]
     StreamExpireAll {
         stream_id: String,
         stream_token_expire_in: Option<crate::json::JsonOf<StreamTokenExpireIn>>,
@@ -197,20 +242,44 @@ pub enum AuthenticationCommands {
     /// Get the current auth token for the stream poller.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix authentication get-stream-poller-token strm_000000000000000000000 sink_000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix authentication get-stream-poller-token strm_abc000000000000000000 sink_abc000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"expiresAt\": \"2030-01-01T00:00:00Z\",
+  \"id\": \"...\",
+  \"name\": \"...\",
+  \"scopes\": [\"...\"],
+  \"token\": \"...\"
+}\n")]
     GetStreamPollerToken { stream_id: String, sink_id: String },
     /// Create a new auth token for the stream poller API.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix authentication rotate-stream-poller-token strm_000000000000000000000 sink_000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix authentication rotate-stream-poller-token strm_abc000000000000000000 sink_abc000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"expiry\": 123,
+  \"oldTokenExpiry\": 123
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"expiresAt\": \"2030-01-01T00:00:00Z\",
+  \"id\": \"...\",
+  \"name\": \"...\",
+  \"scopes\": [\"...\"],
+  \"token\": \"...\"
+}\n")]
     RotateStreamPollerToken {
         stream_id: String,
         sink_id: String,

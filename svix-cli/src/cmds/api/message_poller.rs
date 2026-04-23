@@ -81,11 +81,32 @@ pub enum MessagePollerCommands {
     /// Reads the stream of created messages for an application, filtered on the Sink's event types and Channels.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix message poller poll app_000000000000000000000000000 sink_000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix message poller poll app_abc000000000000000000000000 sink_abc000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"data\": [{
+    \"channels\": [\"project_123\",\"group_2\"],
+    \"deliverAt\": \"2030-01-01T00:00:00Z\",
+    \"eventId\": \"unique-identifier\",
+    \"eventType\": \"user.signup\",
+    \"headers\": {\"key\": \"...\"},
+    \"id\": \"msg_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"payload\": {
+      \"email\": \"test@example.com\",
+      \"type\": \"user.created\",
+      \"username\": \"test_user\"
+    },
+    \"tags\": [\"...\"],
+    \"timestamp\": \"2030-01-01T00:00:00Z\"
+  }],
+  \"done\": true,
+  \"iterator\": \"...\"
+}\n")]
     Poll {
         app_id: String,
         sink_id: String,
@@ -96,11 +117,32 @@ pub enum MessagePollerCommands {
     /// Channels, using server-managed iterator tracking.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix message poller consumer-poll app_000000000000000000000000000 sink_000000000000000000000 CONSUMER_ID\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix message poller consumer-poll app_abc000000000000000000000000 sink_abc000000000000000000 CONSUMER_ID\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"data\": [{
+    \"channels\": [\"project_123\",\"group_2\"],
+    \"deliverAt\": \"2030-01-01T00:00:00Z\",
+    \"eventId\": \"unique-identifier\",
+    \"eventType\": \"user.signup\",
+    \"headers\": {\"key\": \"...\"},
+    \"id\": \"msg_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"payload\": {
+      \"email\": \"test@example.com\",
+      \"type\": \"user.created\",
+      \"username\": \"test_user\"
+    },
+    \"tags\": [\"...\"],
+    \"timestamp\": \"2030-01-01T00:00:00Z\"
+  }],
+  \"done\": true,
+  \"iterator\": \"...\"
+}\n")]
     ConsumerPoll {
         app_id: String,
         sink_id: String,
@@ -111,11 +153,19 @@ pub enum MessagePollerCommands {
     /// Sets the starting offset for the consumer of a polling endpoint.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix message poller consumer-seek app_000000000000000000000000000 sink_000000000000000000000 CONSUMER_ID\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix message poller consumer-seek app_abc000000000000000000000000 sink_abc000000000000000000 CONSUMER_ID {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"after\": \"2025-04-21T11:20:34Z\"
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"iterator\": \"...\"
+}\n")]
     ConsumerSeek {
         app_id: String,
         sink_id: String,

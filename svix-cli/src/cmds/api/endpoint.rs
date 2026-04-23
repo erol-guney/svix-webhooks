@@ -140,11 +140,33 @@ pub enum EndpointCommands {
     /// List the application's endpoints.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix endpoint list app_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix endpoint list app_abc000000000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"data\": [{
+    \"channels\": [\"project_123\",\"group_2\"],
+    \"createdAt\": \"2030-01-01T00:00:00Z\",
+    \"description\": \"...\",
+    \"disabled\": false,
+    \"filterTypes\": [\"user.signup\",\"user.deleted\"],
+    \"id\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"metadata\": {\"key\": \"...\"},
+    \"rateLimit\": 123,
+    \"throttleRate\": 123,
+    \"uid\": \"unique-identifier\",
+    \"updatedAt\": \"2030-01-01T00:00:00Z\",
+    \"url\": \"https://example.com/webhook/\",
+    \"version\": 1
+  }],
+  \"done\": true,
+  \"iterator\": \"iterator\",
+  \"prevIterator\": \"-iterator\"
+}\n")]
     List {
         app_id: String,
         #[clap(flatten)]
@@ -155,11 +177,45 @@ pub enum EndpointCommands {
     /// When `secret` is `null` the secret is automatically generated (recommended).
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix endpoint create app_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix endpoint create app_abc000000000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"channels\": [\"project_123\",\"group_2\"],
+  \"description\": \"An example endpoint name\",
+  \"disabled\": false,
+  \"filterTypes\": [\"user.signup\",\"user.deleted\"],
+  \"headers\": {
+    \"X-Example\": \"123\",
+    \"X-Foobar\": \"Bar\"
+  },
+  \"metadata\": {\"key\": \"...\"},
+  \"rateLimit\": 123,
+  \"secret\": \"whsec_C2FVsBQIhrscChlQIMV+b5sSYspob7oD\",
+  \"throttleRate\": 123,
+  \"uid\": \"unique-identifier\",
+  \"url\": \"https://example.com/webhook/\",
+  \"version\": 1
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"channels\": [\"project_123\",\"group_2\"],
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"description\": \"...\",
+  \"disabled\": false,
+  \"filterTypes\": [\"user.signup\",\"user.deleted\"],
+  \"id\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"metadata\": {\"key\": \"...\"},
+  \"rateLimit\": 123,
+  \"throttleRate\": 123,
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\",
+  \"url\": \"https://example.com/webhook/\",
+  \"version\": 1
+}\n")]
     Create {
         app_id: String,
         endpoint_in: crate::json::JsonOf<EndpointIn>,
@@ -169,20 +225,66 @@ pub enum EndpointCommands {
     /// Get an endpoint.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix endpoint get app_000000000000000000000000000 ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix endpoint get app_abc000000000000000000000000 ep_abc000000000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"channels\": [\"project_123\",\"group_2\"],
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"description\": \"...\",
+  \"disabled\": false,
+  \"filterTypes\": [\"user.signup\",\"user.deleted\"],
+  \"id\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"metadata\": {\"key\": \"...\"},
+  \"rateLimit\": 123,
+  \"throttleRate\": 123,
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\",
+  \"url\": \"https://example.com/webhook/\",
+  \"version\": 1
+}\n")]
     Get { app_id: String, id: String },
     /// Update an endpoint.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix endpoint update app_000000000000000000000000000 ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix endpoint update app_abc000000000000000000000000 ep_abc000000000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"channels\": [\"project_123\",\"group_2\"],
+  \"description\": \"An example endpoint name\",
+  \"disabled\": false,
+  \"filterTypes\": [\"user.signup\",\"user.deleted\"],
+  \"metadata\": {\"key\": \"...\"},
+  \"rateLimit\": 123,
+  \"throttleRate\": 123,
+  \"uid\": \"unique-identifier\",
+  \"url\": \"https://example.com/webhook/\",
+  \"version\": 1
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"channels\": [\"project_123\",\"group_2\"],
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"description\": \"...\",
+  \"disabled\": false,
+  \"filterTypes\": [\"user.signup\",\"user.deleted\"],
+  \"id\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"metadata\": {\"key\": \"...\"},
+  \"rateLimit\": 123,
+  \"throttleRate\": 123,
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\",
+  \"url\": \"https://example.com/webhook/\",
+  \"version\": 1
+}\n")]
     Update {
         app_id: String,
         id: String,
@@ -191,20 +293,51 @@ pub enum EndpointCommands {
     /// Delete an endpoint.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix endpoint delete app_000000000000000000000000000 ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix endpoint delete app_abc000000000000000000000000 ep_abc000000000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
     Delete { app_id: String, id: String },
     /// Partially update an endpoint.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix endpoint patch app_000000000000000000000000000 ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix endpoint patch app_abc000000000000000000000000 ep_abc000000000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"channels\": [\"...\"],
+  \"description\": \"...\",
+  \"disabled\": true,
+  \"filterTypes\": [\"...\"],
+  \"metadata\": {\"key\": \"...\"},
+  \"rateLimit\": 123,
+  \"secret\": \"whsec_C2FVsBQIhrscChlQIMV+b5sSYspob7oD\",
+  \"throttleRate\": 123,
+  \"uid\": \"unique-identifier\",
+  \"url\": \"...\",
+  \"version\": 1
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"channels\": [\"project_123\",\"group_2\"],
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"description\": \"...\",
+  \"disabled\": false,
+  \"filterTypes\": [\"user.signup\",\"user.deleted\"],
+  \"id\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"metadata\": {\"key\": \"...\"},
+  \"rateLimit\": 123,
+  \"throttleRate\": 123,
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\",
+  \"url\": \"https://example.com/webhook/\",
+  \"version\": 1
+}\n")]
     Patch {
         app_id: String,
         id: String,
@@ -228,11 +361,28 @@ pub enum EndpointCommands {
     /// ```
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix endpoint bulk-replay app_000000000000000000000000000 ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix endpoint bulk-replay app_abc000000000000000000000000 ep_abc000000000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"channel\": \"project_1337\",
+  \"eventTypes\": [\"...\"],
+  \"since\": \"2030-01-01T00:00:00Z\",
+  \"status\": 0,
+  \"statusCodeClass\": 0,
+  \"tag\": \"project_1337\",
+  \"until\": \"2030-01-01T00:00:00Z\"
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"id\": \"qtask_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"status\": \"running\",
+  \"task\": \"endpoint.replay\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     BulkReplay {
         app_id: String,
         id: String,
@@ -243,20 +393,37 @@ pub enum EndpointCommands {
     /// Get the additional headers to be sent with the webhook.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix endpoint get-headers app_000000000000000000000000000 ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix endpoint get-headers app_abc000000000000000000000000 ep_abc000000000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"headers\": {
+    \"X-Example\": \"123\",
+    \"X-Foobar\": \"Bar\"
+  },
+  \"sensitive\": [\"Authorization\"]
+}\n")]
     GetHeaders { app_id: String, id: String },
     /// Set the additional headers to be sent with the webhook.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix endpoint update-headers app_000000000000000000000000000 ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix endpoint update-headers app_abc000000000000000000000000 ep_abc000000000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"headers\": {
+    \"X-Example\": \"123\",
+    \"X-Foobar\": \"Bar\"
+  }
+}\n")]
     UpdateHeaders {
         app_id: String,
         id: String,
@@ -265,11 +432,20 @@ pub enum EndpointCommands {
     /// Partially set the additional headers to be sent with the webhook.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix endpoint patch-headers app_000000000000000000000000000 ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix endpoint patch-headers app_abc000000000000000000000000 ep_abc000000000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"deleteHeaders\": [\"...\"],
+  \"headers\": {
+    \"X-Example\": \"123\",
+    \"X-Foobar\": \"Bar\"
+  }
+}\n")]
     PatchHeaders {
         app_id: String,
         id: String,
@@ -292,11 +468,23 @@ pub enum EndpointCommands {
     /// ```
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix endpoint recover app_000000000000000000000000000 ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix endpoint recover app_abc000000000000000000000000 ep_abc000000000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"since\": \"2030-01-01T00:00:00Z\",
+  \"until\": \"2030-01-01T00:00:00Z\"
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"id\": \"qtask_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"status\": \"running\",
+  \"task\": \"endpoint.replay\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Recover {
         app_id: String,
         id: String,
@@ -322,11 +510,23 @@ pub enum EndpointCommands {
     /// ```
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix endpoint replay-missing app_000000000000000000000000000 ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix endpoint replay-missing app_abc000000000000000000000000 ep_abc000000000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"since\": \"2030-01-01T00:00:00Z\",
+  \"until\": \"2030-01-01T00:00:00Z\"
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"id\": \"qtask_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"status\": \"running\",
+  \"task\": \"endpoint.replay\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     ReplayMissing {
         app_id: String,
         id: String,
@@ -340,22 +540,32 @@ pub enum EndpointCommands {
     /// For more information please refer to [the consuming webhooks docs](https://docs.svix.com/consuming-webhooks/).
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix endpoint get-secret app_000000000000000000000000000 ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix endpoint get-secret app_abc000000000000000000000000 ep_abc000000000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"key\": \"whsec_C2FVsBQIhrscChlQIMV+b5sSYspob7oD\"
+}\n")]
     GetSecret { app_id: String, id: String },
     /// Rotates the endpoint's signing secret.
     ///
     /// The previous secret will remain valid for the next 24 hours.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix endpoint rotate-secret app_000000000000000000000000000 ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix endpoint rotate-secret app_abc000000000000000000000000 ep_abc000000000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"key\": \"whsec_C2FVsBQIhrscChlQIMV+b5sSYspob7oD\"
+}\n")]
     RotateSecret {
         app_id: String,
         id: String,
@@ -366,11 +576,31 @@ pub enum EndpointCommands {
     /// Send an example message for an event.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix endpoint send-example app_000000000000000000000000000 ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix endpoint send-example app_abc000000000000000000000000 ep_abc000000000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"eventType\": \"user.signup\",
+  \"exampleIndex\": 123
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"channels\": [\"project_123\",\"group_2\"],
+  \"deliverAt\": \"2030-01-01T00:00:00Z\",
+  \"eventId\": \"unique-identifier\",
+  \"eventType\": \"user.signup\",
+  \"id\": \"msg_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"payload\": {
+    \"email\": \"test@example.com\",
+    \"type\": \"user.created\",
+    \"username\": \"test_user\"
+  },
+  \"tags\": [\"...\"],
+  \"timestamp\": \"2030-01-01T00:00:00Z\"
+}\n")]
     SendExample {
         app_id: String,
         id: String,
@@ -381,11 +611,19 @@ pub enum EndpointCommands {
     /// Get basic statistics for the endpoint.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix endpoint get-stats app_000000000000000000000000000 ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix endpoint get-stats app_abc000000000000000000000000 ep_abc000000000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"fail\": 123,
+  \"pending\": 123,
+  \"sending\": 123,
+  \"success\": 123
+}\n")]
     GetStats {
         app_id: String,
         id: String,
@@ -395,20 +633,33 @@ pub enum EndpointCommands {
     /// Get the transformation code associated with this endpoint.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix endpoint transformation-get app_000000000000000000000000000 ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix endpoint transformation-get app_abc000000000000000000000000 ep_abc000000000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"code\": \"...\",
+  \"enabled\": true,
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     TransformationGet { app_id: String, id: String },
     /// Set or unset the transformation code associated with this endpoint.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix endpoint patch-transformation app_000000000000000000000000000 ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix endpoint patch-transformation app_abc000000000000000000000000 ep_abc000000000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"code\": \"function handler(webhook) { /* ... */ }\",
+  \"enabled\": true
+}\n")]
     PatchTransformation {
         app_id: String,
         id: String,
@@ -417,11 +668,17 @@ pub enum EndpointCommands {
     /// This operation was renamed to `set-transformation`.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix endpoint transformation-partial-update app_000000000000000000000000000 ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix endpoint transformation-partial-update app_abc000000000000000000000000 ep_abc000000000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"code\": \"...\",
+  \"enabled\": true
+}\n")]
     TransformationPartialUpdate {
         app_id: String,
         id: String,

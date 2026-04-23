@@ -74,11 +74,30 @@ pub enum OperationalWebhookEndpointCommands {
     /// List operational webhook endpoints.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix operational-webhook endpoint list\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix operational-webhook endpoint list\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"data\": [{
+    \"createdAt\": \"2030-01-01T00:00:00Z\",
+    \"description\": \"...\",
+    \"disabled\": false,
+    \"filterTypes\": [\"message.attempt.failing\"],
+    \"id\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"metadata\": {\"key\": \"...\"},
+    \"rateLimit\": 123,
+    \"uid\": \"unique-identifier\",
+    \"updatedAt\": \"2030-01-01T00:00:00Z\",
+    \"url\": \"https://example.com/webhook/\"
+  }],
+  \"done\": true,
+  \"iterator\": \"iterator\",
+  \"prevIterator\": \"-iterator\"
+}\n")]
     List {
         #[clap(flatten)]
         options: OperationalWebhookEndpointListOptions,
@@ -86,11 +105,35 @@ pub enum OperationalWebhookEndpointCommands {
     /// Create an operational webhook endpoint.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix operational-webhook endpoint create\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix operational-webhook endpoint create {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"description\": \"An example endpoint name\",
+  \"disabled\": false,
+  \"filterTypes\": [\"message.attempt.failing\"],
+  \"metadata\": {\"key\": \"...\"},
+  \"rateLimit\": 123,
+  \"secret\": \"whsec_C2FVsBQIhrscChlQIMV+b5sSYspob7oD\",
+  \"uid\": \"unique-identifier\",
+  \"url\": \"https://example.com/webhook/\"
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"description\": \"...\",
+  \"disabled\": false,
+  \"filterTypes\": [\"message.attempt.failing\"],
+  \"id\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"metadata\": {\"key\": \"...\"},
+  \"rateLimit\": 123,
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\",
+  \"url\": \"https://example.com/webhook/\"
+}\n")]
     Create {
         operational_webhook_endpoint_in: crate::json::JsonOf<OperationalWebhookEndpointIn>,
         #[clap(flatten)]
@@ -99,20 +142,57 @@ pub enum OperationalWebhookEndpointCommands {
     /// Get an operational webhook endpoint.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix operational-webhook endpoint get ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix operational-webhook endpoint get ep_abc000000000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"description\": \"...\",
+  \"disabled\": false,
+  \"filterTypes\": [\"message.attempt.failing\"],
+  \"id\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"metadata\": {\"key\": \"...\"},
+  \"rateLimit\": 123,
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\",
+  \"url\": \"https://example.com/webhook/\"
+}\n")]
     Get { endpoint_id: String },
     /// Update an operational webhook endpoint.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix operational-webhook endpoint update ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix operational-webhook endpoint update ep_abc000000000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"description\": \"An example endpoint name\",
+  \"disabled\": false,
+  \"filterTypes\": [\"message.attempt.failing\"],
+  \"metadata\": {\"key\": \"...\"},
+  \"rateLimit\": 123,
+  \"uid\": \"unique-identifier\",
+  \"url\": \"https://example.com/webhook/\"
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"description\": \"...\",
+  \"disabled\": false,
+  \"filterTypes\": [\"message.attempt.failing\"],
+  \"id\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"metadata\": {\"key\": \"...\"},
+  \"rateLimit\": 123,
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\",
+  \"url\": \"https://example.com/webhook/\"
+}\n")]
     Update {
         endpoint_id: String,
         operational_webhook_endpoint_update: crate::json::JsonOf<OperationalWebhookEndpointUpdate>,
@@ -120,29 +200,47 @@ pub enum OperationalWebhookEndpointCommands {
     /// Delete an operational webhook endpoint.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix operational-webhook endpoint delete ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix operational-webhook endpoint delete ep_abc000000000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
     Delete { endpoint_id: String },
     /// Get the additional headers to be sent with the operational webhook.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix operational-webhook endpoint get-headers ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix operational-webhook endpoint get-headers ep_abc000000000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"headers\": {
+    \"X-Example\": \"123\",
+    \"X-Foobar\": \"Bar\"
+  },
+  \"sensitive\": [\"Authorization\"]
+}\n")]
     GetHeaders { endpoint_id: String },
     /// Set the additional headers to be sent with the operational webhook.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix operational-webhook endpoint update-headers ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix operational-webhook endpoint update-headers ep_abc000000000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"headers\": {
+    \"X-Example\": \"123\",
+    \"X-Foobar\": \"Bar\"
+  }
+}\n")]
     UpdateHeaders {
         endpoint_id: String,
         operational_webhook_endpoint_headers_in:
@@ -154,22 +252,32 @@ pub enum OperationalWebhookEndpointCommands {
     /// For more information please refer to [the consuming webhooks docs](https://docs.svix.com/consuming-webhooks/).
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix operational-webhook endpoint get-secret ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix operational-webhook endpoint get-secret ep_abc000000000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"key\": \"whsec_C2FVsBQIhrscChlQIMV+b5sSYspob7oD\"
+}\n")]
     GetSecret { endpoint_id: String },
     /// Rotates an operational webhook endpoint's signing secret.
     ///
     /// The previous secret will remain valid for the next 24 hours.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix operational-webhook endpoint rotate-secret ep_000000000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix operational-webhook endpoint rotate-secret ep_abc000000000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"key\": \"whsec_C2FVsBQIhrscChlQIMV+b5sSYspob7oD\"
+}\n")]
     RotateSecret {
         endpoint_id: String,
         operational_webhook_endpoint_secret_in:

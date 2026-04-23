@@ -55,11 +55,26 @@ pub enum StreamingStreamCommands {
     /// List of all the organization's streams.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix streaming stream list\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming stream list\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"data\": [{
+    \"createdAt\": \"2030-01-01T00:00:00Z\",
+    \"id\": \"strm_2yZwUhtgs5Ai8T9yRQJXA\",
+    \"metadata\": {\"key\": \"...\"},
+    \"name\": \"...\",
+    \"uid\": \"unique-identifier\",
+    \"updatedAt\": \"2030-01-01T00:00:00Z\"
+  }],
+  \"done\": true,
+  \"iterator\": \"iterator\",
+  \"prevIterator\": \"-iterator\"
+}\n")]
     List {
         #[clap(flatten)]
         options: StreamingStreamListOptions,
@@ -67,11 +82,26 @@ pub enum StreamingStreamCommands {
     /// Creates a new stream.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix streaming stream create\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming stream create {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"...\",
+  \"uid\": \"unique-identifier\"
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"id\": \"strm_2yZwUhtgs5Ai8T9yRQJXA\",
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"...\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Create {
         stream_in: crate::json::JsonOf<StreamIn>,
         #[clap(flatten)]
@@ -80,20 +110,45 @@ pub enum StreamingStreamCommands {
     /// Get a stream by id or uid.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix streaming stream get strm_000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming stream get strm_abc000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"id\": \"strm_2yZwUhtgs5Ai8T9yRQJXA\",
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"...\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Get { stream_id: String },
     /// Update a stream.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix streaming stream update strm_000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming stream update strm_abc000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"...\",
+  \"uid\": \"unique-identifier\"
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"id\": \"strm_2yZwUhtgs5Ai8T9yRQJXA\",
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"...\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Update {
         stream_id: String,
         stream_in: crate::json::JsonOf<StreamIn>,
@@ -101,20 +156,36 @@ pub enum StreamingStreamCommands {
     /// Delete a stream.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix streaming stream delete strm_000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming stream delete strm_abc000000000000000000\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
     Delete { stream_id: String },
     /// Partially update a stream.
     #[command(help_template = concat!(
             "{about-with-newline}\n",
-            "{usage-heading} {usage}\n",
-            "Example:   svix streaming stream patch strm_000000000000000000000\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming stream patch strm_abc000000000000000000 {...}\n",
+            "{after-help}",
             "\n",
-            "{all-args}{after-help}",
+            "{all-args}",
         ))]
+    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+{
+  \"description\": \"...\",
+  \"metadata\": {\"key\": \"...\"},
+  \"uid\": \"unique-identifier\"
+}\n\n\x1b[1;4mExample response:\x1b[0m
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"id\": \"strm_2yZwUhtgs5Ai8T9yRQJXA\",
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"...\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Patch {
         stream_id: String,
         stream_patch: Option<crate::json::JsonOf<StreamPatch>>,
