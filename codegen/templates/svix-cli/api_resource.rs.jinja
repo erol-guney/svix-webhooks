@@ -24,7 +24,7 @@ use svix::api::*;
 use super::{{ sub.name | to_snake_case }}::{{ sub.name | to_upper_camel_case }}Args;
 {% endfor %}
 
-{%- macro get_type_example(field, api) -%}
+{%- macro get_type_example(field, api, indent) -%}
     {%- if field.type.is_string_const() -%}
         \"{{ field.type.string_const_val() }}\"
     {%- elif field.type.is_unix_timestamp_ms() -%}
@@ -40,9 +40,9 @@ use super::{{ sub.name | to_snake_case }}::{{ sub.name | to_upper_camel_case }}A
     {%- elif field.type.is_int_or_uint() -%}
         123
     {%- elif field.type.is_list() or field.type.is_set() -%}
-        [{{ get_type_example({"type": field.type.inner_type()}, api) }}]
+        [{{ get_type_example({"type": field.type.inner_type()}, api, indent) }}]
     {%- elif field.type.is_map() -%}
-        {\"key\": {{ get_type_example({"type": field.type.value_type()}, api) }}}
+        {\"key\": {{ get_type_example({"type": field.type.value_type()}, api, indent) }}}
     {%- elif field.type.is_json_object() -%}
         {\"key\": \"...\"}
     {%- elif field.type.is_schema_ref() -%}
@@ -52,7 +52,7 @@ use super::{{ sub.name | to_snake_case }}::{{ sub.name | to_upper_camel_case }}A
         {%- elif ref_type is defined and ref_type.kind == "integer_enum" -%}
             {{ ref_type.variants[0][1] }}
         {%- elif ref_type is defined and ref_type.kind == "struct" -%}
-            {{ render_inline_object(ref_type, api) }}
+            {{ render_inline_object(ref_type, api, indent) }}
         {%- else -%}
             {\"...\": \"...\"}
         {%- endif -%}
@@ -61,19 +61,19 @@ use super::{{ sub.name | to_snake_case }}::{{ sub.name | to_upper_camel_case }}A
     {%- endif -%}
 {%- endmacro -%}
 
-{%- macro render_inline_object(schema, api) -%}
-    {
-    {%- for f in schema.fields -%}
-        \"{{ f.name }}\": {% if f.example is defined %}{{ f.example | tojson | replace('\\', '\\\\') | replace('"', '\\"') }}{% else %}{{ get_type_example(f, api) }}{% endif %}{{ ", " if not loop.last else "" }}
-    {%- endfor -%}
-    }
+{%- macro render_inline_object(schema, api, indent) -%}
+{
+{%- for f in schema.fields %}
+{{ indent }}  \"{{ f.name }}\": {% if f.example is defined %}{{ f.example | tojson | replace('\\', '\\\\') | replace('"', '\\"') }}{% else %}{{ get_type_example(f, api, indent + "  ") }}{% endif %}{{ "," if not loop.last else "" }}
+{%- endfor %}
+{{ indent }}}
 {%- endmacro -%}
 
 {%- macro render_schema_example(title, schema, api) -%}
 \x1b[1;4m{{ title }}:\x1b[0m
 {
 {%- for field in schema.fields | selectattr("positional", "false") %}
-  \"{{ field.name }}\": {% if field.example is defined %}{{ field.example | tojson | replace('\\', '\\\\') | replace('"', '\\"') }}{% else %}{{ get_type_example(field, api) }}{% endif %}{{ "," if not loop.last else "" }}
+  \"{{ field.name }}\": {% if field.example is defined %}{{ field.example | tojson | replace('\\', '\\\\') | replace('"', '\\"') }}{% else %}{{ get_type_example(field, api, "  ") }}{% endif %}{{ "," if not loop.last else "" }}
 {%- endfor %}
 }
 {%- endmacro -%}
