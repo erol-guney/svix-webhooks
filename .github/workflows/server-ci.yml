@@ -7,6 +7,10 @@ env:
   CARGO_TERM_COLOR: always
   RUST_BACKTRACE: 1
 
+defaults:
+  run:
+    working-directory: server
+
 jobs:
   check-fmt:
     name: Check formatting
@@ -20,7 +24,6 @@ jobs:
 
       - name: rustfmt
         run: cargo fmt -- --check
-        working-directory: server
 
   check-unused-deps:
     name: Check for unused dependencies
@@ -31,7 +34,6 @@ jobs:
       - uses: taiki-e/install-action@cargo-machete
 
       - run: cargo machete
-        working-directory: server
 
   test-versions:
     name: Server CI
@@ -61,21 +63,18 @@ jobs:
 
       - name: Build
         run: cargo test --all-features --no-run --locked
-        working-directory: server
 
       - name: Install dependencies
         run: sudo apt-get install -y jq
 
       - name: Check for uncommitted OpenAPI changes
-        working-directory: ./server
         run: ./generate-openapi.sh --check
 
       - name: Start dependencies
-        run: docker compose -f "server/testing-docker-compose.yml" up -d
+        run: docker compose -f "testing-docker-compose.yml" up -d
 
       - name: Clippy
         run: cargo clippy --all-targets --all-features -- -D warnings
-        working-directory: server
 
       - name: Run migrations
         env:
@@ -85,11 +84,9 @@ jobs:
           SVIX_JWT_SECRET: "test value"
           SVIX_CACHE_TYPE: "memory"
         run: cargo run -- --wait-for 15 migrate
-        working-directory: server
 
       - name: Run tests
-        working-directory: ./server
         run: ./run-tests.sh
 
       - name: Stop dependencies
-        run: docker compose -f "server/testing-docker-compose.yml" down
+        run: docker compose -f "testing-docker-compose.yml" down
