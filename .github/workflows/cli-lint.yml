@@ -6,12 +6,16 @@ on:
 env:
   CARGO_TERM_COLOR: always
 
+defaults:
+  run:
+    working-directory: svix-cli
+
 jobs:
   check-fmt:
     name: Check formatting
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - uses: dtolnay/rust-toolchain@nightly
         with:
@@ -19,7 +23,6 @@ jobs:
 
       - name: rustfmt
         run: cargo fmt -- --check
-        working-directory: svix-cli
 
   test-versions:
     name: CLI Lint
@@ -29,10 +32,10 @@ jobs:
         # keep this in sync with svix-cli/Cargo.toml MSRV
         rust: ["1.88.0", stable, beta]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Regen openapi libs
-        run: ./regen_openapi.py
+        run: ../regen_openapi.py
 
       - uses: dtolnay/rust-toolchain@master
         with:
@@ -52,8 +55,6 @@ jobs:
 
       - name: Clippy
         run: cargo clippy --locked --all-targets --all-features -- -D warnings
-        working-directory: svix-cli
 
       - name: Run tests
         run: cargo nextest run
-        working-directory: svix-cli

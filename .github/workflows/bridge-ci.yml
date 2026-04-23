@@ -7,12 +7,16 @@ env:
   CARGO_TERM_COLOR: always
   RUST_BACKTRACE: 1
 
+defaults:
+  run:
+    working-directory: bridge
+
 jobs:
   check-fmt:
     name: Check formatting
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - uses: dtolnay/rust-toolchain@nightly
         with:
@@ -20,18 +24,16 @@ jobs:
 
       - name: rustfmt
         run: cargo fmt -- --check
-        working-directory: bridge
 
   check-unused-deps:
     name: Check for unused dependencies
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - uses: taiki-e/install-action@cargo-machete
 
       - run: cargo machete
-        working-directory: bridge
 
   test-versions:
     name: Webhook Bridge CI
@@ -40,7 +42,7 @@ jobs:
       matrix:
         rust: ["1.91.1", stable, beta]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - uses: dtolnay/rust-toolchain@master
         with:
@@ -60,7 +62,6 @@ jobs:
 
       - name: Clippy
         run: cargo clippy --locked --all-targets --all-features -- -D warnings
-        working-directory: bridge
 
       - name: Install system dependencies
         # Packages should align with whatever is in the bridge/Dockerfile
@@ -74,15 +75,13 @@ jobs:
             zlib1g-dev=1:*
 
       - name: Start required services
-        run: docker compose -f "bridge/testing-docker-compose.yml" up -d
+        run: docker compose -f "testing-docker-compose.yml" up -d
 
       - name: Run tests
-        working-directory: bridge
         run: ./run-tests.sh
 
       - name: Stop required services
-        run: docker compose -f "bridge/testing-docker-compose.yml" down
+        run: docker compose -f "testing-docker-compose.yml" down
 
       - name: Idle Test
-        working-directory: bridge
         run: ./run-idle-test.sh
