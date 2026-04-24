@@ -133,6 +133,24 @@ To stay up-to-date with new features and improvements be sure to watch our repo!
 
 </table>
 
+
+## Trying out the CLI
+
+The Svix CLI is published on npm as [`svix-cli`](https://www.npmjs.com/package/svix-cli). You can run it directly with `npx` without installing anything:
+
+```sh
+npx svix-cli --help
+```
+
+Or install it globally:
+
+```sh
+npm install -g svix-cli
+svix-cli --help
+```
+
+
+
 # Running the server
 
 There are multiple ways to get the Svix server up running. Docker is probably the most common one, but you can choose the one that works best for you.
