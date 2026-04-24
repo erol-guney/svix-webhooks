@@ -19,6 +19,21 @@ A CLI to interact with the Svix API.
 
 ### Pre-built executables
 
+### Via NPM
+
+The Svix CLI is published on npm as [`svix-cli`](https://www.npmjs.com/package/svix-cli). You can run it directly with `npx` without installing anything:
+
+```sh
+npx svix-cli --help
+```
+
+Or install it globally:
+
+```sh
+npm install -g svix-cli
+svix-cli --help
+```
+
 #### Via installer scripts
 
 Pre-built binaries are available for Linux, macOS via shell script installers.
