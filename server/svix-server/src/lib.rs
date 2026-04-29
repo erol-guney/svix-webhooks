@@ -219,9 +219,10 @@ pub async fn run_with_prefix(
 
     let with_api = cfg.api_enabled;
     let with_worker = cfg.worker_enabled;
+    let with_background_migrations = cfg.background_migrations_enabled;
     let listen_address = cfg.listen_address;
 
-    let ((), worker_loop, expired_message_cleaner_loop) = tokio::join!(
+    let ((), worker_loop, expired_message_cleaner_loop, ()) = tokio::join!(
         async {
             if with_api {
                 let listener = match listener {
@@ -265,6 +266,14 @@ pub async fn run_with_prefix(
             } else {
                 tracing::debug!("Expired message cleaner: off");
                 Ok(())
+            }
+        },
+        async {
+            if with_background_migrations {
+                tracing::debug!("Background migrations: Started");
+                db::background_migrations::run(&cfg).await
+            } else {
+                tracing::debug!("Background migrations: off");
             }
         }
     );
