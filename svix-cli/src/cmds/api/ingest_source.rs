@@ -74,7 +74,7 @@ pub enum IngestSourceCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"data\": [{\"...\": \"...\"}],
   \"done\": true,
@@ -94,12 +94,12 @@ pub enum IngestSourceCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"metadata\": {\"key\": \"...\"},
   \"name\": \"...\",
   \"uid\": \"unique-identifier\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"createdAt\": \"2030-01-01T00:00:00Z\",
   \"id\": \"src_2yZwUhtgs5Ai8T9yRQJXA\",
@@ -123,7 +123,7 @@ pub enum IngestSourceCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"createdAt\": \"2030-01-01T00:00:00Z\",
   \"id\": \"src_2yZwUhtgs5Ai8T9yRQJXA\",
@@ -143,12 +143,12 @@ pub enum IngestSourceCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"metadata\": {\"key\": \"...\"},
   \"name\": \"...\",
   \"uid\": \"unique-identifier\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"createdAt\": \"2030-01-01T00:00:00Z\",
   \"id\": \"src_2yZwUhtgs5Ai8T9yRQJXA\",
@@ -186,7 +186,7 @@ pub enum IngestSourceCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"ingestUrl\": \"...\"
 }\n")]

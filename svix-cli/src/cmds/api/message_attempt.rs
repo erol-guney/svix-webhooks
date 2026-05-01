@@ -253,7 +253,7 @@ pub enum MessageAttemptCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"data\": [{
     \"endpointId\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
@@ -306,7 +306,7 @@ pub enum MessageAttemptCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"data\": [{
     \"endpointId\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
@@ -361,7 +361,7 @@ pub enum MessageAttemptCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"data\": [{
     \"channels\": [\"project_123\",\"group_2\"],
@@ -399,7 +399,7 @@ pub enum MessageAttemptCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"endpointId\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
   \"id\": \"atmpt_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
@@ -461,7 +461,7 @@ pub enum MessageAttemptCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"data\": [{
     \"channels\": [\"project_123\",\"group_2\"],
@@ -499,7 +499,7 @@ pub enum MessageAttemptCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
 }\n")]
     Resend {

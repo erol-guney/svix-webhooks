@@ -65,7 +65,7 @@ pub enum ConnectorCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"data\": [{
     \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
@@ -101,7 +101,7 @@ pub enum ConnectorCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
   \"description\": \"Example connector description\",
@@ -113,7 +113,7 @@ pub enum ConnectorCommands {
   \"productType\": \"Dispatch\",
   \"transformation\": \"function handler(webhook) { /* ... */ }\",
   \"uid\": \"unique-identifier\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
   \"createdAt\": \"2030-01-01T00:00:00Z\",
@@ -145,7 +145,7 @@ pub enum ConnectorCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
   \"createdAt\": \"2030-01-01T00:00:00Z\",
@@ -173,7 +173,7 @@ pub enum ConnectorCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
   \"description\": \"Example connector description\",
@@ -183,7 +183,7 @@ pub enum ConnectorCommands {
   \"logo\": \"https://example.com/logo.png\",
   \"name\": \"My first connector\",
   \"transformation\": \"function handler(webhook) { /* ... */ }\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
   \"createdAt\": \"2030-01-01T00:00:00Z\",
@@ -224,7 +224,7 @@ pub enum ConnectorCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
   \"description\": \"...\",
@@ -234,7 +234,7 @@ pub enum ConnectorCommands {
   \"logo\": \"...\",
   \"name\": \"...\",
   \"transformation\": \"...\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
   \"createdAt\": \"2030-01-01T00:00:00Z\",

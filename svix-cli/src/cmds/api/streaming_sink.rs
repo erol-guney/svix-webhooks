@@ -74,7 +74,7 @@ pub enum StreamingSinkCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"data\": [{\"...\": \"...\"}],
   \"done\": true,
@@ -95,7 +95,7 @@ pub enum StreamingSinkCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"batchSize\": 100,
   \"eventTypes\": [\"...\"],
@@ -103,7 +103,7 @@ pub enum StreamingSinkCommands {
   \"metadata\": {\"key\": \"...\"},
   \"status\": \"enabled\",
   \"uid\": \"unique-identifier\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"batchSize\": 123,
   \"createdAt\": \"2030-01-01T00:00:00Z\",
@@ -133,7 +133,7 @@ pub enum StreamingSinkCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"batchSize\": 123,
   \"createdAt\": \"2030-01-01T00:00:00Z\",
@@ -158,7 +158,7 @@ pub enum StreamingSinkCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"batchSize\": 100,
   \"eventTypes\": [\"...\"],
@@ -166,7 +166,7 @@ pub enum StreamingSinkCommands {
   \"metadata\": {\"key\": \"...\"},
   \"status\": \"enabled\",
   \"uid\": \"unique-identifier\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"batchSize\": 123,
   \"createdAt\": \"2030-01-01T00:00:00Z\",
@@ -205,7 +205,7 @@ pub enum StreamingSinkCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"batchSize\": 100,
   \"eventTypes\": [\"...\"],
@@ -213,7 +213,7 @@ pub enum StreamingSinkCommands {
   \"metadata\": {\"key\": \"...\"},
   \"status\": \"enabled\",
   \"uid\": \"unique-identifier\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"batchSize\": 123,
   \"createdAt\": \"2030-01-01T00:00:00Z\",
@@ -246,7 +246,7 @@ pub enum StreamingSinkCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"key\": \"whsec_C2FVsBQIhrscChlQIMV+b5sSYspob7oD\"
 }\n")]
@@ -260,10 +260,10 @@ pub enum StreamingSinkCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"key\": \"whsec_C2FVsBQIhrscChlQIMV+b5sSYspob7oD\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
 }\n")]
     RotateSecret {
@@ -282,10 +282,10 @@ pub enum StreamingSinkCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"code\": \"...\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
 }\n")]
     TransformationPartialUpdate {

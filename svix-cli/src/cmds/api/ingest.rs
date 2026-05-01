@@ -36,11 +36,11 @@ pub enum IngestCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"expiry\": 123,
   \"readOnly\": true
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"token\": \"appsk_kV3ts5tKPNJN4Dl25cMTfUNdmabxbX0O\",
   \"url\": \"https://app.svix.com/login#key=eyJhcHBJZCI6ICJhcHBfMXRSdFl\"

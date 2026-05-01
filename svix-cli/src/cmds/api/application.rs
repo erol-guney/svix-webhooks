@@ -75,7 +75,7 @@ pub enum ApplicationCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"data\": [{
     \"createdAt\": \"2030-01-01T00:00:00Z\",
@@ -104,14 +104,14 @@ pub enum ApplicationCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"metadata\": {\"key\": \"...\"},
   \"name\": \"My first application\",
   \"rateLimit\": 123,
   \"throttleRate\": 123,
   \"uid\": \"unique-identifier\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"createdAt\": \"2030-01-01T00:00:00Z\",
   \"id\": \"app_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
@@ -136,7 +136,7 @@ pub enum ApplicationCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"createdAt\": \"2030-01-01T00:00:00Z\",
   \"id\": \"app_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
@@ -157,14 +157,14 @@ pub enum ApplicationCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"metadata\": {\"key\": \"...\"},
   \"name\": \"My first application\",
   \"rateLimit\": 123,
   \"throttleRate\": 123,
   \"uid\": \"unique-identifier\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"createdAt\": \"2030-01-01T00:00:00Z\",
   \"id\": \"app_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
@@ -198,13 +198,13 @@ pub enum ApplicationCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"metadata\": {\"key\": \"...\"},
   \"name\": \"...\",
   \"rateLimit\": 123,
   \"uid\": \"unique-identifier\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"createdAt\": \"2030-01-01T00:00:00Z\",
   \"id\": \"app_1srOrx2ZWZBpBUvZwXKQmoEYga2\",

@@ -60,7 +60,7 @@ pub enum StreamingEventsCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"events\": [{\"eventType\":\"user.signup\",\"payload\":\"{\\\"email\\\":\\\"test@example.com\\\",\\\"username\\\":\\\"test_user\\\"}\"}],
   \"stream\": {
@@ -68,7 +68,7 @@ pub enum StreamingEventsCommands {
     \"name\": \"...\",
     \"uid\": \"unique-identifier\"
   }
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
 }\n")]
     Create {
@@ -88,7 +88,7 @@ pub enum StreamingEventsCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"data\": [{
     \"eventType\": \"user.signup\",

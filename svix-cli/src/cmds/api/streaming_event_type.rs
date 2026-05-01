@@ -80,7 +80,7 @@ pub enum StreamingEventTypeCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"data\": [{
     \"archived\": true,
@@ -108,14 +108,14 @@ pub enum StreamingEventTypeCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"archived\": true,
   \"deprecated\": true,
   \"description\": \"...\",
   \"featureFlags\": [\"cool-new-feature\"],
   \"name\": \"user.signup\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"archived\": true,
   \"createdAt\": \"2030-01-01T00:00:00Z\",
@@ -139,7 +139,7 @@ pub enum StreamingEventTypeCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"archived\": true,
   \"createdAt\": \"2030-01-01T00:00:00Z\",
@@ -159,14 +159,14 @@ pub enum StreamingEventTypeCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"archived\": true,
   \"deprecated\": true,
   \"description\": \"...\",
   \"featureFlags\": [\"cool-new-feature\"],
   \"name\": \"user.signup\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"archived\": true,
   \"createdAt\": \"2030-01-01T00:00:00Z\",
@@ -203,14 +203,14 @@ pub enum StreamingEventTypeCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"archived\": true,
   \"deprecated\": true,
   \"description\": \"...\",
   \"featureFlags\": [\"cool-new-feature\"],
   \"name\": \"user.signup\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"archived\": true,
   \"createdAt\": \"2030-01-01T00:00:00Z\",

@@ -146,7 +146,7 @@ pub enum EndpointCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"data\": [{
     \"channels\": [\"project_123\",\"group_2\"],
@@ -183,7 +183,7 @@ pub enum EndpointCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"channels\": [\"project_123\",\"group_2\"],
   \"description\": \"An example endpoint name\",
@@ -200,7 +200,7 @@ pub enum EndpointCommands {
   \"uid\": \"unique-identifier\",
   \"url\": \"https://example.com/webhook/\",
   \"version\": 1
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"channels\": [\"project_123\",\"group_2\"],
   \"createdAt\": \"2030-01-01T00:00:00Z\",
@@ -231,7 +231,7 @@ pub enum EndpointCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"channels\": [\"project_123\",\"group_2\"],
   \"createdAt\": \"2030-01-01T00:00:00Z\",
@@ -257,7 +257,7 @@ pub enum EndpointCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"channels\": [\"project_123\",\"group_2\"],
   \"description\": \"An example endpoint name\",
@@ -269,7 +269,7 @@ pub enum EndpointCommands {
   \"uid\": \"unique-identifier\",
   \"url\": \"https://example.com/webhook/\",
   \"version\": 1
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"channels\": [\"project_123\",\"group_2\"],
   \"createdAt\": \"2030-01-01T00:00:00Z\",
@@ -309,7 +309,7 @@ pub enum EndpointCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"channels\": [\"...\"],
   \"description\": \"...\",
@@ -322,7 +322,7 @@ pub enum EndpointCommands {
   \"uid\": \"unique-identifier\",
   \"url\": \"...\",
   \"version\": 1
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"channels\": [\"project_123\",\"group_2\"],
   \"createdAt\": \"2030-01-01T00:00:00Z\",
@@ -367,7 +367,7 @@ pub enum EndpointCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"channel\": \"project_1337\",
   \"eventTypes\": [\"...\"],
@@ -376,7 +376,7 @@ pub enum EndpointCommands {
   \"statusCodeClass\": 0,
   \"tag\": \"project_1337\",
   \"until\": \"2030-01-01T00:00:00Z\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"id\": \"qtask_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
   \"status\": \"running\",
@@ -399,7 +399,7 @@ pub enum EndpointCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"headers\": {
     \"X-Example\": \"123\",
@@ -417,7 +417,7 @@ pub enum EndpointCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"headers\": {
     \"X-Example\": \"123\",
@@ -438,7 +438,7 @@ pub enum EndpointCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"deleteHeaders\": [\"...\"],
   \"headers\": {
@@ -474,11 +474,11 @@ pub enum EndpointCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"since\": \"2030-01-01T00:00:00Z\",
   \"until\": \"2030-01-01T00:00:00Z\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"id\": \"qtask_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
   \"status\": \"running\",
@@ -516,11 +516,11 @@ pub enum EndpointCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"since\": \"2030-01-01T00:00:00Z\",
   \"until\": \"2030-01-01T00:00:00Z\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"id\": \"qtask_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
   \"status\": \"running\",
@@ -546,7 +546,7 @@ pub enum EndpointCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"key\": \"whsec_C2FVsBQIhrscChlQIMV+b5sSYspob7oD\"
 }\n")]
@@ -562,7 +562,7 @@ pub enum EndpointCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"key\": \"whsec_C2FVsBQIhrscChlQIMV+b5sSYspob7oD\"
 }\n")]
@@ -582,11 +582,11 @@ pub enum EndpointCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"eventType\": \"user.signup\",
   \"exampleIndex\": 123
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"channels\": [\"project_123\",\"group_2\"],
   \"deliverAt\": \"2030-01-01T00:00:00Z\",
@@ -617,7 +617,7 @@ pub enum EndpointCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"fail\": 123,
   \"pending\": 123,
@@ -639,7 +639,7 @@ pub enum EndpointCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"code\": \"...\",
   \"enabled\": true,
@@ -655,7 +655,7 @@ pub enum EndpointCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"code\": \"function handler(webhook) { /* ... */ }\",
   \"enabled\": true
@@ -674,7 +674,7 @@ pub enum EndpointCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"code\": \"...\",
   \"enabled\": true

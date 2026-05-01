@@ -29,7 +29,7 @@ pub enum StreamingCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"headers\": {
     \"X-Example\": \"123\",
@@ -50,13 +50,13 @@ pub enum StreamingCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"headers\": {
     \"X-Example\": \"123\",
     \"X-Foobar\": \"Bar\"
   }
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"headers\": {
     \"X-Example\": \"123\",
@@ -78,7 +78,7 @@ pub enum StreamingCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"code\": \"...\",
   \"enabled\": true

@@ -119,7 +119,7 @@ pub enum AuthenticationCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"application\": {
     \"metadata\": {\"key\": \"...\"},
@@ -133,7 +133,7 @@ pub enum AuthenticationCommands {
   \"featureFlags\": [],
   \"readOnly\": true,
   \"sessionId\": \"user_1FB8\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"token\": \"appsk_kV3ts5tKPNJN4Dl25cMTfUNdmabxbX0O\",
   \"url\": \"https://app.svix.com/login#key=eyJhcHBJZCI6ICJhcHBfMXRSdFl\"
@@ -153,7 +153,7 @@ pub enum AuthenticationCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"expiry\": 60,
   \"sessionIds\": [\"...\"]
@@ -203,12 +203,12 @@ pub enum AuthenticationCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"expiry\": 123,
   \"featureFlags\": [],
   \"sessionId\": \"user_1FB8\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"token\": \"appsk_kV3ts5tKPNJN4Dl25cMTfUNdmabxbX0O\",
   \"url\": \"https://app.svix.com/login#key=eyJhcHBJZCI6ICJhcHBfMXRSdFl\"
@@ -228,7 +228,7 @@ pub enum AuthenticationCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"expiry\": 60,
   \"sessionIds\": [\"...\"]
@@ -248,7 +248,7 @@ pub enum AuthenticationCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"createdAt\": \"2030-01-01T00:00:00Z\",
   \"expiresAt\": \"2030-01-01T00:00:00Z\",
@@ -267,11 +267,11 @@ pub enum AuthenticationCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"expiry\": 123,
   \"oldTokenExpiry\": 123
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"createdAt\": \"2030-01-01T00:00:00Z\",
   \"expiresAt\": \"2030-01-01T00:00:00Z\",

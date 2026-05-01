@@ -49,7 +49,7 @@ pub enum EnvironmentCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"connectors\": [{
     \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
@@ -119,7 +119,7 @@ pub enum EnvironmentCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"connectors\": [{
     \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],

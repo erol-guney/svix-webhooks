@@ -87,7 +87,7 @@ pub enum MessagePollerCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"data\": [{
     \"channels\": [\"project_123\",\"group_2\"],
@@ -123,7 +123,7 @@ pub enum MessagePollerCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"data\": [{
     \"channels\": [\"project_123\",\"group_2\"],
@@ -159,10 +159,10 @@ pub enum MessagePollerCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"after\": \"2025-04-21T11:20:34Z\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"iterator\": \"...\"
 }\n")]

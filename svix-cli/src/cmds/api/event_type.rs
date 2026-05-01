@@ -98,7 +98,7 @@ pub enum EventTypeCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"data\": [{
     \"archived\": false,
@@ -150,7 +150,7 @@ pub enum EventTypeCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"archived\": false,
   \"deprecated\": true,
@@ -177,7 +177,7 @@ pub enum EventTypeCommands {
       \"type\": \"object\"
     }
   }
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"archived\": false,
   \"createdAt\": \"2030-01-01T00:00:00Z\",
@@ -225,7 +225,7 @@ pub enum EventTypeCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"dryRun\": true,
   \"replaceAll\": true,
@@ -270,7 +270,7 @@ pub enum EventTypeCommands {
     }
   },
   \"specRaw\": \"\\n# Both YAML and JSON are supported\\nopenapi: 3.1.0\\ninfo:\\n  title: Webhook Example\\n  version: 1.0.0\\n# Since OAS 3.1.0 the paths element isn\\u0027t necessary. Now a valid OpenAPI Document can describe only paths, webhooks, or even only reusable components\\nwebhooks:\\n  # Each webhook needs a name\\n  \\\"pet.new\\\":\\n    # This is a Path Item Object, the only difference is that the request is initiated by the API provider\\n    post:\\n      requestBody:\\n        description: Information about a new pet in the system\\n        content:\\n          application/json:\\n            schema:\\n              $ref: \\\"#/components/schemas/Pet\\\"\\n      responses:\\n        \\\"200\\\":\\n          description: Return a 200 status to indicate that the data was received successfully\\n\\ncomponents:\\n  schemas:\\n    Pet:\\n      required:\\n        - id\\n        - name\\n      properties:\\n        id:\\n          type: integer\\n          format: int64\\n        name:\\n          type: string\\n        tag:\\n          type: string\\n\"
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"data\": {
     \"modified\": [\"...\"],
@@ -314,7 +314,7 @@ pub enum EventTypeCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample response:\x1b[0m
+    #[command(after_help = "Example response:
 {
   \"archived\": false,
   \"createdAt\": \"2030-01-01T00:00:00Z\",
@@ -354,7 +354,7 @@ pub enum EventTypeCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"archived\": false,
   \"deprecated\": true,
@@ -380,7 +380,7 @@ pub enum EventTypeCommands {
       \"type\": \"object\"
     }
   }
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"archived\": false,
   \"createdAt\": \"2030-01-01T00:00:00Z\",
@@ -442,7 +442,7 @@ pub enum EventTypeCommands {
             "\n",
             "{all-args}",
         ))]
-    #[command(after_help = "\x1b[1;4mExample body:\x1b[0m
+    #[command(after_help = "Example body:
 {
   \"archived\": true,
   \"deprecated\": true,
@@ -466,7 +466,7 @@ pub enum EventTypeCommands {
     \"title\": \"Invoice Paid Event\",
     \"type\": \"object\"
   }
-}\n\n\x1b[1;4mExample response:\x1b[0m
+}\n\nExample response:
 {
   \"archived\": false,
   \"createdAt\": \"2030-01-01T00:00:00Z\",
