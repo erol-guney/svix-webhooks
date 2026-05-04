@@ -57,26 +57,201 @@ pub struct ConnectorArgs {
 #[derive(Subcommand)]
 pub enum ConnectorCommands {
     /// List all connectors for an application.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix connector list\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"data\": [{
+    \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
+    \"createdAt\": \"2030-01-01T00:00:00Z\",
+    \"description\": \"...\",
+    \"featureFlags\": [\"cool-new-feature\"],
+    \"id\": \"trtmpl_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"instructions\": \"...\",
+    \"kind\": \"Custom\",
+    \"logo\": \"...\",
+    \"name\": \"...\",
+    \"orgId\": \"org_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"productType\": \"Dispatch\",
+    \"transformation\": \"...\",
+    \"transformationUpdatedAt\": \"2030-01-01T00:00:00Z\",
+    \"uid\": \"unique-identifier\",
+    \"updatedAt\": \"2030-01-01T00:00:00Z\"
+  }],
+  \"done\": true,
+  \"iterator\": \"iterator\",
+  \"prevIterator\": \"-iterator\"
+}\n")]
     List {
         #[clap(flatten)]
         options: ConnectorListOptions,
     },
     /// Create a new connector.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix connector create {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
+  \"description\": \"Example connector description\",
+  \"featureFlags\": [\"...\"],
+  \"instructions\": \"Markdown-formatted instructions\",
+  \"kind\": \"Slack\",
+  \"logo\": \"https://example.com/logo.png\",
+  \"name\": \"My first connector\",
+  \"productType\": \"Dispatch\",
+  \"transformation\": \"function handler(webhook) { /* ... */ }\",
+  \"uid\": \"unique-identifier\"
+}\n\nExample response:
+{
+  \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"description\": \"...\",
+  \"featureFlags\": [\"cool-new-feature\"],
+  \"id\": \"trtmpl_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"instructions\": \"...\",
+  \"kind\": \"Custom\",
+  \"logo\": \"...\",
+  \"name\": \"...\",
+  \"orgId\": \"org_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"productType\": \"Dispatch\",
+  \"transformation\": \"...\",
+  \"transformationUpdatedAt\": \"2030-01-01T00:00:00Z\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Create {
         connector_in: crate::json::JsonOf<ConnectorIn>,
         #[clap(flatten)]
         options: ConnectorCreateOptions,
     },
     /// Get a connector.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix connector get CONNECTOR_ID\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"description\": \"...\",
+  \"featureFlags\": [\"cool-new-feature\"],
+  \"id\": \"trtmpl_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"instructions\": \"...\",
+  \"kind\": \"Custom\",
+  \"logo\": \"...\",
+  \"name\": \"...\",
+  \"orgId\": \"org_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"productType\": \"Dispatch\",
+  \"transformation\": \"...\",
+  \"transformationUpdatedAt\": \"2030-01-01T00:00:00Z\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Get { id: String },
     /// Update a connector.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix connector update CONNECTOR_ID {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
+  \"description\": \"Example connector description\",
+  \"featureFlags\": [\"cool-new-feature\"],
+  \"instructions\": \"Markdown-formatted instructions\",
+  \"kind\": \"Slack\",
+  \"logo\": \"https://example.com/logo.png\",
+  \"name\": \"My first connector\",
+  \"transformation\": \"function handler(webhook) { /* ... */ }\"
+}\n\nExample response:
+{
+  \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"description\": \"...\",
+  \"featureFlags\": [\"cool-new-feature\"],
+  \"id\": \"trtmpl_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"instructions\": \"...\",
+  \"kind\": \"Custom\",
+  \"logo\": \"...\",
+  \"name\": \"...\",
+  \"orgId\": \"org_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"productType\": \"Dispatch\",
+  \"transformation\": \"...\",
+  \"transformationUpdatedAt\": \"2030-01-01T00:00:00Z\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Update {
         id: String,
         connector_update: crate::json::JsonOf<ConnectorUpdate>,
     },
     /// Delete a connector.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix connector delete CONNECTOR_ID\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
     Delete { id: String },
     /// Partially update a connector.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix connector patch CONNECTOR_ID {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
+  \"description\": \"...\",
+  \"featureFlags\": [\"cool-new-feature\"],
+  \"instructions\": \"...\",
+  \"kind\": \"Custom\",
+  \"logo\": \"...\",
+  \"name\": \"...\",
+  \"transformation\": \"...\"
+}\n\nExample response:
+{
+  \"allowedEventTypes\": [\"user.signup\",\"user.deleted\"],
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"description\": \"...\",
+  \"featureFlags\": [\"cool-new-feature\"],
+  \"id\": \"trtmpl_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"instructions\": \"...\",
+  \"kind\": \"Custom\",
+  \"logo\": \"...\",
+  \"name\": \"...\",
+  \"orgId\": \"org_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"productType\": \"Dispatch\",
+  \"transformation\": \"...\",
+  \"transformationUpdatedAt\": \"2030-01-01T00:00:00Z\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Patch {
         id: String,
         connector_patch: Option<crate::json::JsonOf<ConnectorPatch>>,

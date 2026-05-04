@@ -52,6 +52,25 @@ pub struct StreamingEventsArgs {
 #[derive(Subcommand)]
 pub enum StreamingEventsCommands {
     /// Creates events on the Stream.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming events create strm_abc000000000000000000 {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"events\": [{\"eventType\":\"user.signup\",\"payload\":\"{\\\"email\\\":\\\"test@example.com\\\",\\\"username\\\":\\\"test_user\\\"}\"}],
+  \"stream\": {
+    \"metadata\": {\"key\": \"...\"},
+    \"name\": \"...\",
+    \"uid\": \"unique-identifier\"
+  }
+}\n\nExample response:
+{
+}\n")]
     Create {
         stream_id: String,
         create_stream_events_in: crate::json::JsonOf<CreateStreamEventsIn>,
@@ -61,6 +80,24 @@ pub enum StreamingEventsCommands {
     /// Iterate over a stream of events.
     ///
     /// The sink must be of type `poller` to use the poller endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming events get strm_abc000000000000000000 sink_abc000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"data\": [{
+    \"eventType\": \"user.signup\",
+    \"payload\": \"...\",
+    \"timestamp\": \"2030-01-01T00:00:00Z\"
+  }],
+  \"done\": true,
+  \"iterator\": \"...\"
+}\n")]
     Get {
         stream_id: String,
         sink_id: String,

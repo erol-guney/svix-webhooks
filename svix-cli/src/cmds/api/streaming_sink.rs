@@ -66,12 +66,58 @@ pub struct StreamingSinkArgs {
 #[derive(Subcommand)]
 pub enum StreamingSinkCommands {
     /// List of all the stream's sinks.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming sink list strm_abc000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"data\": [{\"...\": \"...\"}],
+  \"done\": true,
+  \"iterator\": \"iterator\",
+  \"prevIterator\": \"-iterator\"
+}\n")]
     List {
         stream_id: String,
         #[clap(flatten)]
         options: StreamingSinkListOptions,
     },
     /// Creates a new sink.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming sink create strm_abc000000000000000000 {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"batchSize\": 100,
+  \"eventTypes\": [\"...\"],
+  \"maxWaitSecs\": 123,
+  \"metadata\": {\"key\": \"...\"},
+  \"status\": \"enabled\",
+  \"uid\": \"unique-identifier\"
+}\n\nExample response:
+{
+  \"batchSize\": 123,
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"currentIterator\": \"...\",
+  \"eventTypes\": [\"...\"],
+  \"failureReason\": \"...\",
+  \"id\": \"sink_2yZwUhtgs5Ai8T9yRQJXA\",
+  \"maxWaitSecs\": 123,
+  \"metadata\": {\"key\": \"...\"},
+  \"nextRetryAt\": \"2030-01-01T00:00:00Z\",
+  \"status\": \"enabled\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Create {
         stream_id: String,
         stream_sink_in: Option<crate::json::JsonOf<StreamSinkIn>>,
@@ -79,16 +125,109 @@ pub enum StreamingSinkCommands {
         options: StreamingSinkCreateOptions,
     },
     /// Get a sink by id or uid.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming sink get strm_abc000000000000000000 sink_abc000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"batchSize\": 123,
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"currentIterator\": \"...\",
+  \"eventTypes\": [\"...\"],
+  \"failureReason\": \"...\",
+  \"id\": \"sink_2yZwUhtgs5Ai8T9yRQJXA\",
+  \"maxWaitSecs\": 123,
+  \"metadata\": {\"key\": \"...\"},
+  \"nextRetryAt\": \"2030-01-01T00:00:00Z\",
+  \"status\": \"enabled\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Get { stream_id: String, sink_id: String },
     /// Update a sink.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming sink update strm_abc000000000000000000 sink_abc000000000000000000 {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"batchSize\": 100,
+  \"eventTypes\": [\"...\"],
+  \"maxWaitSecs\": 123,
+  \"metadata\": {\"key\": \"...\"},
+  \"status\": \"enabled\",
+  \"uid\": \"unique-identifier\"
+}\n\nExample response:
+{
+  \"batchSize\": 123,
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"currentIterator\": \"...\",
+  \"eventTypes\": [\"...\"],
+  \"failureReason\": \"...\",
+  \"id\": \"sink_2yZwUhtgs5Ai8T9yRQJXA\",
+  \"maxWaitSecs\": 123,
+  \"metadata\": {\"key\": \"...\"},
+  \"nextRetryAt\": \"2030-01-01T00:00:00Z\",
+  \"status\": \"enabled\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Update {
         stream_id: String,
         sink_id: String,
         stream_sink_in: Option<crate::json::JsonOf<StreamSinkIn>>,
     },
     /// Delete a sink.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming sink delete strm_abc000000000000000000 sink_abc000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
     Delete { stream_id: String, sink_id: String },
     /// Partially update a sink.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming sink patch strm_abc000000000000000000 sink_abc000000000000000000 {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"batchSize\": 100,
+  \"eventTypes\": [\"...\"],
+  \"maxWaitSecs\": 123,
+  \"metadata\": {\"key\": \"...\"},
+  \"status\": \"enabled\",
+  \"uid\": \"unique-identifier\"
+}\n\nExample response:
+{
+  \"batchSize\": 123,
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"currentIterator\": \"...\",
+  \"eventTypes\": [\"...\"],
+  \"failureReason\": \"...\",
+  \"id\": \"sink_2yZwUhtgs5Ai8T9yRQJXA\",
+  \"maxWaitSecs\": 123,
+  \"metadata\": {\"key\": \"...\"},
+  \"nextRetryAt\": \"2030-01-01T00:00:00Z\",
+  \"status\": \"enabled\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Patch {
         stream_id: String,
         sink_id: String,
@@ -99,8 +238,34 @@ pub enum StreamingSinkCommands {
     /// This is used to verify the authenticity of the delivery.
     ///
     /// For more information please refer to [the consuming webhooks docs](https://docs.svix.com/consuming-webhooks/).
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming sink get-secret strm_abc000000000000000000 sink_abc000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"key\": \"whsec_C2FVsBQIhrscChlQIMV+b5sSYspob7oD\"
+}\n")]
     GetSecret { stream_id: String, sink_id: String },
     /// Rotates the signing secret (only supported for http sinks).
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming sink rotate-secret strm_abc000000000000000000 sink_abc000000000000000000 {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"key\": \"whsec_C2FVsBQIhrscChlQIMV+b5sSYspob7oD\"
+}\n\nExample response:
+{
+}\n")]
     RotateSecret {
         stream_id: String,
         sink_id: String,
@@ -109,6 +274,20 @@ pub enum StreamingSinkCommands {
         options: StreamingSinkRotateSecretOptions,
     },
     /// Set or unset the transformation code associated with this sink.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming sink transformation-partial-update strm_abc000000000000000000 sink_abc000000000000000000 {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"code\": \"...\"
+}\n\nExample response:
+{
+}\n")]
     TransformationPartialUpdate {
         stream_id: String,
         sink_id: String,

@@ -66,12 +66,66 @@ pub struct IngestEndpointArgs {
 #[derive(Subcommand)]
 pub enum IngestEndpointCommands {
     /// List ingest endpoints.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest endpoint list src_abc000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"data\": [{
+    \"createdAt\": \"2030-01-01T00:00:00Z\",
+    \"description\": \"...\",
+    \"disabled\": false,
+    \"id\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"metadata\": {\"key\": \"...\"},
+    \"rateLimit\": 123,
+    \"uid\": \"unique-identifier\",
+    \"updatedAt\": \"2030-01-01T00:00:00Z\",
+    \"url\": \"https://example.com/webhook/\"
+  }],
+  \"done\": true,
+  \"iterator\": \"iterator\",
+  \"prevIterator\": \"-iterator\"
+}\n")]
     List {
         source_id: String,
         #[clap(flatten)]
         options: IngestEndpointListOptions,
     },
     /// Create an ingest endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest endpoint create src_abc000000000000000000 {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"description\": \"An example endpoint name\",
+  \"disabled\": false,
+  \"metadata\": {\"key\": \"...\"},
+  \"rateLimit\": 123,
+  \"secret\": \"whsec_C2FVsBQIhrscChlQIMV+b5sSYspob7oD\",
+  \"uid\": \"unique-identifier\",
+  \"url\": \"https://example.com/webhook/\"
+}\n\nExample response:
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"description\": \"...\",
+  \"disabled\": false,
+  \"id\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"metadata\": {\"key\": \"...\"},
+  \"rateLimit\": 123,
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\",
+  \"url\": \"https://example.com/webhook/\"
+}\n")]
     Create {
         source_id: String,
         ingest_endpoint_in: crate::json::JsonOf<IngestEndpointIn>,
@@ -79,27 +133,114 @@ pub enum IngestEndpointCommands {
         options: IngestEndpointCreateOptions,
     },
     /// Get an ingest endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest endpoint get src_abc000000000000000000 ep_abc000000000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"description\": \"...\",
+  \"disabled\": false,
+  \"id\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"metadata\": {\"key\": \"...\"},
+  \"rateLimit\": 123,
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\",
+  \"url\": \"https://example.com/webhook/\"
+}\n")]
     Get {
         source_id: String,
         endpoint_id: String,
     },
     /// Update an ingest endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest endpoint update src_abc000000000000000000 ep_abc000000000000000000000000 {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"description\": \"An example endpoint name\",
+  \"disabled\": false,
+  \"metadata\": {\"key\": \"...\"},
+  \"rateLimit\": 123,
+  \"uid\": \"unique-identifier\",
+  \"url\": \"https://example.com/webhook/\"
+}\n\nExample response:
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"description\": \"...\",
+  \"disabled\": false,
+  \"id\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"metadata\": {\"key\": \"...\"},
+  \"rateLimit\": 123,
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\",
+  \"url\": \"https://example.com/webhook/\"
+}\n")]
     Update {
         source_id: String,
         endpoint_id: String,
         ingest_endpoint_update: crate::json::JsonOf<IngestEndpointUpdate>,
     },
     /// Delete an ingest endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest endpoint delete src_abc000000000000000000 ep_abc000000000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
     Delete {
         source_id: String,
         endpoint_id: String,
     },
     /// Get the additional headers to be sent with the ingest.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest endpoint get-headers src_abc000000000000000000 ep_abc000000000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"headers\": {
+    \"X-Example\": \"123\",
+    \"X-Foobar\": \"Bar\"
+  },
+  \"sensitive\": [\"Authorization\"]
+}\n")]
     GetHeaders {
         source_id: String,
         endpoint_id: String,
     },
     /// Set the additional headers to be sent to the endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest endpoint update-headers src_abc000000000000000000 ep_abc000000000000000000000000 {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"headers\": {
+    \"X-Example\": \"123\",
+    \"X-Foobar\": \"Bar\"
+  }
+}\n")]
     UpdateHeaders {
         source_id: String,
         endpoint_id: String,
@@ -109,6 +250,18 @@ pub enum IngestEndpointCommands {
     ///
     /// This is used to verify the authenticity of the webhook.
     /// For more information please refer to [the consuming webhooks docs](https://docs.svix.com/consuming-webhooks/).
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest endpoint get-secret src_abc000000000000000000 ep_abc000000000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"key\": \"whsec_C2FVsBQIhrscChlQIMV+b5sSYspob7oD\"
+}\n")]
     GetSecret {
         source_id: String,
         endpoint_id: String,
@@ -116,6 +269,18 @@ pub enum IngestEndpointCommands {
     /// Rotates an ingest endpoint's signing secret.
     ///
     /// The previous secret will remain valid for the next 24 hours.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest endpoint rotate-secret src_abc000000000000000000 ep_abc000000000000000000000000 {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"key\": \"whsec_C2FVsBQIhrscChlQIMV+b5sSYspob7oD\"
+}\n")]
     RotateSecret {
         source_id: String,
         endpoint_id: String,
@@ -124,11 +289,37 @@ pub enum IngestEndpointCommands {
         options: IngestEndpointRotateSecretOptions,
     },
     /// Get the transformation code associated with this ingest endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest endpoint get-transformation src_abc000000000000000000 ep_abc000000000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"code\": \"...\",
+  \"enabled\": true
+}\n")]
     GetTransformation {
         source_id: String,
         endpoint_id: String,
     },
     /// Set or unset the transformation code associated with this ingest endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest endpoint set-transformation src_abc000000000000000000 ep_abc000000000000000000000000 {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"code\": \"...\",
+  \"enabled\": true
+}\n")]
     SetTransformation {
         source_id: String,
         endpoint_id: String,

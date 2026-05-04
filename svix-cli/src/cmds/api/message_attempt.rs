@@ -245,6 +245,47 @@ pub enum MessageAttemptCommands {
     /// relative to now or, if an iterator is provided, 90 days before/after the time indicated
     /// by the iterator ID. If you require data beyond those time ranges, you will need to explicitly
     /// set the `before` or `after` parameter as appropriate.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix message-attempt list-by-endpoint app_abc000000000000000000000000 ep_abc000000000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"data\": [{
+    \"endpointId\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"id\": \"atmpt_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"msg\": {
+      \"channels\": [\"project_123\",\"group_2\"],
+      \"deliverAt\": \"2030-01-01T00:00:00Z\",
+      \"eventId\": \"unique-identifier\",
+      \"eventType\": \"user.signup\",
+      \"id\": \"msg_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+      \"payload\": {
+        \"email\": \"test@example.com\",
+        \"type\": \"user.created\",
+        \"username\": \"test_user\"
+      },
+      \"tags\": [\"...\"],
+      \"timestamp\": \"2030-01-01T00:00:00Z\"
+    },
+    \"msgId\": \"msg_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"response\": \"{}\",
+    \"responseDurationMs\": 123,
+    \"responseStatusCode\": 200,
+    \"status\": 0,
+    \"statusText\": \"success\",
+    \"timestamp\": \"2030-01-01T00:00:00Z\",
+    \"triggerType\": 0,
+    \"url\": \"https://example.com/webhook/\"
+  }],
+  \"done\": true,
+  \"iterator\": \"iterator\",
+  \"prevIterator\": \"-iterator\"
+}\n")]
     ListByEndpoint {
         app_id: String,
         endpoint_id: String,
@@ -257,6 +298,47 @@ pub enum MessageAttemptCommands {
     /// relative to now or, if an iterator is provided, 90 days before/after the time indicated
     /// by the iterator ID. If you require data beyond those time ranges, you will need to explicitly
     /// set the `before` or `after` parameter as appropriate.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix message-attempt list-by-msg app_abc000000000000000000000000 msg_abc000000000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"data\": [{
+    \"endpointId\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"id\": \"atmpt_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"msg\": {
+      \"channels\": [\"project_123\",\"group_2\"],
+      \"deliverAt\": \"2030-01-01T00:00:00Z\",
+      \"eventId\": \"unique-identifier\",
+      \"eventType\": \"user.signup\",
+      \"id\": \"msg_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+      \"payload\": {
+        \"email\": \"test@example.com\",
+        \"type\": \"user.created\",
+        \"username\": \"test_user\"
+      },
+      \"tags\": [\"...\"],
+      \"timestamp\": \"2030-01-01T00:00:00Z\"
+    },
+    \"msgId\": \"msg_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"response\": \"{}\",
+    \"responseDurationMs\": 123,
+    \"responseStatusCode\": 200,
+    \"status\": 0,
+    \"statusText\": \"success\",
+    \"timestamp\": \"2030-01-01T00:00:00Z\",
+    \"triggerType\": 0,
+    \"url\": \"https://example.com/webhook/\"
+  }],
+  \"done\": true,
+  \"iterator\": \"iterator\",
+  \"prevIterator\": \"-iterator\"
+}\n")]
     ListByMsg {
         app_id: String,
         msg_id: String,
@@ -271,6 +353,37 @@ pub enum MessageAttemptCommands {
     /// relative to now or, if an iterator is provided, 90 days before/after the time indicated
     /// by the iterator ID. If you require data beyond those time ranges, you will need to explicitly
     /// set the `before` or `after` parameter as appropriate.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix message-attempt list-attempted-messages app_abc000000000000000000000000 ep_abc000000000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"data\": [{
+    \"channels\": [\"project_123\",\"group_2\"],
+    \"deliverAt\": \"2030-01-01T00:00:00Z\",
+    \"eventId\": \"unique-identifier\",
+    \"eventType\": \"user.signup\",
+    \"id\": \"msg_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"nextAttempt\": \"2030-01-01T00:00:00Z\",
+    \"payload\": {
+      \"email\": \"test@example.com\",
+      \"type\": \"user.created\",
+      \"username\": \"test_user\"
+    },
+    \"status\": 0,
+    \"statusText\": \"success\",
+    \"tags\": [\"...\"],
+    \"timestamp\": \"2030-01-01T00:00:00Z\"
+  }],
+  \"done\": true,
+  \"iterator\": \"iterator\",
+  \"prevIterator\": \"-iterator\"
+}\n")]
     ListAttemptedMessages {
         app_id: String,
         endpoint_id: String,
@@ -278,6 +391,42 @@ pub enum MessageAttemptCommands {
         options: MessageAttemptListAttemptedMessagesOptions,
     },
     /// `msg_id`: Use a message id or a message `eventId`
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix message-attempt get app_abc000000000000000000000000 msg_abc000000000000000000000000 atmpt_abc000000000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"endpointId\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"id\": \"atmpt_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"msg\": {
+    \"channels\": [\"project_123\",\"group_2\"],
+    \"deliverAt\": \"2030-01-01T00:00:00Z\",
+    \"eventId\": \"unique-identifier\",
+    \"eventType\": \"user.signup\",
+    \"id\": \"msg_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"payload\": {
+      \"email\": \"test@example.com\",
+      \"type\": \"user.created\",
+      \"username\": \"test_user\"
+    },
+    \"tags\": [\"...\"],
+    \"timestamp\": \"2030-01-01T00:00:00Z\"
+  },
+  \"msgId\": \"msg_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"response\": \"{}\",
+  \"responseDurationMs\": 123,
+  \"responseStatusCode\": 200,
+  \"status\": 0,
+  \"statusText\": \"success\",
+  \"timestamp\": \"2030-01-01T00:00:00Z\",
+  \"triggerType\": 0,
+  \"url\": \"https://example.com/webhook/\"
+}\n")]
     Get {
         app_id: String,
         msg_id: String,
@@ -287,6 +436,14 @@ pub enum MessageAttemptCommands {
     ///
     /// Useful when an endpoint accidentally returned sensitive content.
     /// The message can't be replayed or resent once its payload has been deleted or expired.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix message-attempt expunge-content app_abc000000000000000000000000 msg_abc000000000000000000000000 atmpt_abc000000000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
     ExpungeContent {
         app_id: String,
         msg_id: String,
@@ -296,6 +453,37 @@ pub enum MessageAttemptCommands {
     ///
     /// Additionally includes metadata about the latest message attempt.
     /// By default, endpoints are listed in ascending order by ID.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix message-attempt list-attempted-destinations app_abc000000000000000000000000 msg_abc000000000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"data\": [{
+    \"channels\": [\"project_123\",\"group_2\"],
+    \"createdAt\": \"2030-01-01T00:00:00Z\",
+    \"description\": \"...\",
+    \"disabled\": false,
+    \"filterTypes\": [\"user.signup\",\"user.deleted\"],
+    \"id\": \"ep_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"nextAttempt\": \"2030-01-01T00:00:00Z\",
+    \"rateLimit\": 123,
+    \"status\": 0,
+    \"statusText\": \"success\",
+    \"throttleRate\": 123,
+    \"uid\": \"unique-identifier\",
+    \"updatedAt\": \"2030-01-01T00:00:00Z\",
+    \"url\": \"https://example.com/webhook/\",
+    \"version\": 1
+  }],
+  \"done\": true,
+  \"iterator\": \"iterator\",
+  \"prevIterator\": \"-iterator\"
+}\n")]
     ListAttemptedDestinations {
         app_id: String,
         msg_id: String,
@@ -303,6 +491,17 @@ pub enum MessageAttemptCommands {
         options: MessageAttemptListAttemptedDestinationsOptions,
     },
     /// Resend a message to the specified endpoint.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix message-attempt resend app_abc000000000000000000000000 msg_abc000000000000000000000000 ep_abc000000000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+}\n")]
     Resend {
         app_id: String,
         msg_id: String,

@@ -67,26 +67,154 @@ pub struct ApplicationArgs {
 #[derive(Subcommand)]
 pub enum ApplicationCommands {
     /// List of all the organization's applications.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix application list\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"data\": [{
+    \"createdAt\": \"2030-01-01T00:00:00Z\",
+    \"id\": \"app_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+    \"metadata\": {\"key\": \"...\"},
+    \"name\": \"My first application\",
+    \"rateLimit\": 123,
+    \"throttleRate\": 123,
+    \"uid\": \"unique-identifier\",
+    \"updatedAt\": \"2030-01-01T00:00:00Z\"
+  }],
+  \"done\": true,
+  \"iterator\": \"iterator\",
+  \"prevIterator\": \"-iterator\"
+}\n")]
     List {
         #[clap(flatten)]
         options: ApplicationListOptions,
     },
     /// Create a new application.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix application create {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"My first application\",
+  \"rateLimit\": 123,
+  \"throttleRate\": 123,
+  \"uid\": \"unique-identifier\"
+}\n\nExample response:
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"id\": \"app_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"My first application\",
+  \"rateLimit\": 123,
+  \"throttleRate\": 123,
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Create {
         application_in: crate::json::JsonOf<ApplicationIn>,
         #[clap(flatten)]
         options: ApplicationCreateOptions,
     },
     /// Get an application.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix application get app_abc000000000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"id\": \"app_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"My first application\",
+  \"rateLimit\": 123,
+  \"throttleRate\": 123,
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Get { id: String },
     /// Update an application.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix application update app_abc000000000000000000000000 {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"My first application\",
+  \"rateLimit\": 123,
+  \"throttleRate\": 123,
+  \"uid\": \"unique-identifier\"
+}\n\nExample response:
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"id\": \"app_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"My first application\",
+  \"rateLimit\": 123,
+  \"throttleRate\": 123,
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Update {
         id: String,
         application_in: crate::json::JsonOf<ApplicationIn>,
     },
     /// Delete an application.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix application delete app_abc000000000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
     Delete { id: String },
     /// Partially update an application.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix application patch app_abc000000000000000000000000 {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"...\",
+  \"rateLimit\": 123,
+  \"uid\": \"unique-identifier\"
+}\n\nExample response:
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"id\": \"app_1srOrx2ZWZBpBUvZwXKQmoEYga2\",
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"My first application\",
+  \"rateLimit\": 123,
+  \"throttleRate\": 123,
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Patch {
         id: String,
         application_patch: Option<crate::json::JsonOf<ApplicationPatch>>,

@@ -66,24 +66,111 @@ pub struct IngestSourceArgs {
 #[derive(Subcommand)]
 pub enum IngestSourceCommands {
     /// List of all the organization's Ingest Sources.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest source list\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"data\": [{\"...\": \"...\"}],
+  \"done\": true,
+  \"iterator\": \"iterator\",
+  \"prevIterator\": \"-iterator\"
+}\n")]
     List {
         #[clap(flatten)]
         options: IngestSourceListOptions,
     },
     /// Create Ingest Source.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest source create {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"...\",
+  \"uid\": \"unique-identifier\"
+}\n\nExample response:
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"id\": \"src_2yZwUhtgs5Ai8T9yRQJXA\",
+  \"ingestUrl\": \"...\",
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"...\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Create {
         ingest_source_in: crate::json::JsonOf<IngestSourceIn>,
         #[clap(flatten)]
         options: IngestSourceCreateOptions,
     },
     /// Get an Ingest Source by id or uid.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest source get src_abc000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"id\": \"src_2yZwUhtgs5Ai8T9yRQJXA\",
+  \"ingestUrl\": \"...\",
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"...\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Get { source_id: String },
     /// Update an Ingest Source.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest source update src_abc000000000000000000 {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"...\",
+  \"uid\": \"unique-identifier\"
+}\n\nExample response:
+{
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"id\": \"src_2yZwUhtgs5Ai8T9yRQJXA\",
+  \"ingestUrl\": \"...\",
+  \"metadata\": {\"key\": \"...\"},
+  \"name\": \"...\",
+  \"uid\": \"unique-identifier\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Update {
         source_id: String,
         ingest_source_in: crate::json::JsonOf<IngestSourceIn>,
     },
     /// Delete an Ingest Source.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest source delete src_abc000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
     Delete { source_id: String },
     /// Rotate the Ingest Source's Url Token.
     ///
@@ -91,6 +178,18 @@ pub enum IngestSourceCommands {
     /// construct the unique `ingestUrl` for the source. Previous tokens
     /// will remain valid for 48 hours after rotation. The token can be
     /// rotated a maximum of three times within the 48-hour period.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix ingest source rotate-token src_abc000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"ingestUrl\": \"...\"
+}\n")]
     RotateToken {
         source_id: String,
         #[clap(flatten)]

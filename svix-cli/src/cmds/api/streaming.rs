@@ -21,17 +21,68 @@ pub enum StreamingCommands {
     Sink(StreamingSinkArgs),
     Stream(StreamingStreamArgs),
     /// Get the HTTP sink headers. Only valid for `http` or `otelTracing` sinks.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming sink-headers-get strm_abc000000000000000000 sink_abc000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"headers\": {
+    \"X-Example\": \"123\",
+    \"X-Foobar\": \"Bar\"
+  },
+  \"sensitive\": [\"Authorization\"]
+}\n")]
     SinkHeadersGet {
         stream_id: String,
         sink_id: String,
     },
     /// Updates the Sink's headers. Only valid for `http` or `otelTracing` sinks.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming sink-headers-patch strm_abc000000000000000000 sink_abc000000000000000000 {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"headers\": {
+    \"X-Example\": \"123\",
+    \"X-Foobar\": \"Bar\"
+  }
+}\n\nExample response:
+{
+  \"headers\": {
+    \"X-Example\": \"123\",
+    \"X-Foobar\": \"Bar\"
+  },
+  \"sensitive\": [\"Authorization\"]
+}\n")]
     SinkHeadersPatch {
         stream_id: String,
         sink_id: String,
         http_sink_headers_patch_in: crate::json::JsonOf<HttpSinkHeadersPatchIn>,
     },
     /// Get the transformation code associated with this sink.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming sink-transformation-get strm_abc000000000000000000 sink_abc000000000000000000\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"code\": \"...\",
+  \"enabled\": true
+}\n")]
     SinkTransformationGet {
         stream_id: String,
         sink_id: String,

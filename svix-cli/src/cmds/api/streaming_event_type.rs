@@ -72,30 +72,154 @@ pub struct StreamingEventTypeArgs {
 #[derive(Subcommand)]
 pub enum StreamingEventTypeCommands {
     /// List of all the organization's event types for streaming.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming event-type list\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"data\": [{
+    \"archived\": true,
+    \"createdAt\": \"2030-01-01T00:00:00Z\",
+    \"deprecated\": true,
+    \"description\": \"...\",
+    \"featureFlags\": [\"cool-new-feature\"],
+    \"name\": \"user.signup\",
+    \"updatedAt\": \"2030-01-01T00:00:00Z\"
+  }],
+  \"done\": true,
+  \"iterator\": \"iterator\",
+  \"prevIterator\": \"-iterator\"
+}\n")]
     List {
         #[clap(flatten)]
         options: StreamingEventTypeListOptions,
     },
     /// Create an event type for Streams.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming event-type create {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"archived\": true,
+  \"deprecated\": true,
+  \"description\": \"...\",
+  \"featureFlags\": [\"cool-new-feature\"],
+  \"name\": \"user.signup\"
+}\n\nExample response:
+{
+  \"archived\": true,
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"deprecated\": true,
+  \"description\": \"...\",
+  \"featureFlags\": [\"cool-new-feature\"],
+  \"name\": \"user.signup\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Create {
         stream_event_type_in: crate::json::JsonOf<StreamEventTypeIn>,
         #[clap(flatten)]
         options: StreamingEventTypeCreateOptions,
     },
     /// Get an event type.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming event-type get NAME\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example response:
+{
+  \"archived\": true,
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"deprecated\": true,
+  \"description\": \"...\",
+  \"featureFlags\": [\"cool-new-feature\"],
+  \"name\": \"user.signup\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Get { name: String },
     /// Update or create a event type for Streams.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming event-type update NAME {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"archived\": true,
+  \"deprecated\": true,
+  \"description\": \"...\",
+  \"featureFlags\": [\"cool-new-feature\"],
+  \"name\": \"user.signup\"
+}\n\nExample response:
+{
+  \"archived\": true,
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"deprecated\": true,
+  \"description\": \"...\",
+  \"featureFlags\": [\"cool-new-feature\"],
+  \"name\": \"user.signup\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Update {
         name: String,
         stream_event_type_in: crate::json::JsonOf<StreamEventTypeIn>,
     },
     /// Delete an event type.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming event-type delete NAME\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
     Delete {
         name: String,
         #[clap(flatten)]
         options: StreamingEventTypeDeleteOptions,
     },
     /// Patch an event type for Streams.
+    #[command(help_template = concat!(
+            "{about-with-newline}\n",
+            "{usage-heading} {usage}\n\n",
+            "Example: svix streaming event-type patch NAME {...}\n",
+            "{after-help}",
+            "\n",
+            "{all-args}",
+        ))]
+    #[command(after_help = "Example body:
+{
+  \"archived\": true,
+  \"deprecated\": true,
+  \"description\": \"...\",
+  \"featureFlags\": [\"cool-new-feature\"],
+  \"name\": \"user.signup\"
+}\n\nExample response:
+{
+  \"archived\": true,
+  \"createdAt\": \"2030-01-01T00:00:00Z\",
+  \"deprecated\": true,
+  \"description\": \"...\",
+  \"featureFlags\": [\"cool-new-feature\"],
+  \"name\": \"user.signup\",
+  \"updatedAt\": \"2030-01-01T00:00:00Z\"
+}\n")]
     Patch {
         name: String,
         stream_event_type_patch: Option<crate::json::JsonOf<StreamEventTypePatch>>,
