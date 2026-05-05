@@ -2123,6 +2123,10 @@
         "rust/src/api/mod.rs"
     ],
     [
+        "rust/src/api_internal/endpoint.rs",
+        "rust/src/api_internal/endpoint_auto_config.rs"
+    ],
+    [
         "rust/src/models/adobe_sign_config.rs",
         "rust/src/models/adobe_sign_config_out.rs",
         "rust/src/models/aggregate_event_types_out.rs",
@@ -2328,6 +2332,7 @@
         "rust/src/models/stream_token_expire_in.rs",
         "rust/src/models/stripe_config.rs",
         "rust/src/models/stripe_config_out.rs",
+        "rust/src/models/subscribe_in.rs",
         "rust/src/models/svix_config.rs",
         "rust/src/models/svix_config_out.rs",
         "rust/src/models/telnyx_config.rs",

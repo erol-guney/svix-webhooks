@@ -14,6 +14,8 @@ use hyper::body::Bytes;
 use hyper_util::client::legacy::Client as HyperClient;
 
 pub mod api;
+mod api_internal;
+pub mod autoconfig;
 mod connector;
 pub mod error;
 mod model_ext;
